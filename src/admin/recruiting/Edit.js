@@ -1,54 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { recruitingService } from "@/_services";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { useForm, Controller } from "react-hook-form";
+import React from "react";
 import { Editor } from "react-draft-wysiwyg";
-import htmlToDraft from "html-to-draftjs";
+import { EditorState, ContentState } from "draft-js";
+import { recruitingService } from "@/_services";
+import htmlToDraft from 'html-to-draftjs';
 
-function Edit({ match }) {
-  const { id } = match.params;
-  const [edit, setEdit] = useState(0);
-  
 
-  useEffect(() => {
-    recruitingService.getById(id)
-    .then((data) => setEdit(data));
-  }, []);
-
-  const { handleSubmit, control } = useForm({
-    mode: "onChange",
-  });
-
-  const handleSubmitOnClick = ({ editor_content }) => {
-    console.log("editor_content ==> ", editor_content);
-  };
-
-  if (edit === 0) {
-    return (
-      <span className="spinner-border spinner-border-lg align-center"></span>
-    );
-  } else {
-    const contentBlock = htmlToDraft(edit.recruitingText);
-    const contentState = ContentState.createFromBlockArray(
-      contentBlock.contentBlocks
-    );
+export default class Edit extends React.Component {
+  constructor(props) {
+    super(props);
+    const content = recruitingService.getById(props.match.params.id);
+    const contentState = ContentState.createFromBlockArray(content);
     const editorState = EditorState.createWithContent(contentState);
 
+    this.state = {
+      contentState,
+      editorState,
+      content
+    };
+  }
+
+  onContentStateChange = contentState => {
+    this.setState({
+      contentState
+    });
+  };
+
+  onEditorStateChange = editorState => {
+    this.setState({
+      editorState
+    });
+  };
+
+  render() {
+    const { editorState } = this.state;
+    const { content } = this.state;
+    const blocksFromHtml = htmlToDraft(content);
+    console.log(blocksFromHtml);
     return (
-      <section>
-        <form onSubmit={handleSubmit(handleSubmitOnClick)}>
+      <div className="Edit">
         <Editor
+          editorClassName={"report-editor"}
           editorState={editorState}
-          wrapperClassName="editor-wrapper"
-          editorClassName="editor"
+          onEditorStateChange={this.onEditorStateChange}
+          onContentStateChange={this.onContentStateChange}
         />
-          <button type="submit" className="signup-button">
-            Speichern
-          </button>
-        </form>
-      </section>
+      </div>
     );
   }
 }
-
-export default Edit;

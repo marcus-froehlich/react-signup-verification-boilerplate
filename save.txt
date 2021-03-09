@@ -1,0 +1,88 @@
+import React, { useState, useEffect } from "react";
+import { EditorState, ContentState } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import { recruitingService } from "@/_services";
+import htmlToDraft from "html-to-draftjs";
+
+const WYSIWYGEditor = (props) => {
+  const [edit, setEdit] = useState(null);
+  const [editorState, setEditorState] = useState(null);
+  const id = props.id;
+
+  useEffect(() => {
+    recruitingService.getById(id).then((data) => setEdit(data));
+  }, []);
+
+  if (edit != null) {
+    const blocksFromHtml = htmlToDraft(edit.recruitingText);
+    const { contentBlocks, entityMap } = blocksFromHtml;
+    const contentState = ContentState.createFromBlockArray(
+      contentBlocks,
+      entityMap
+    );
+    const editorState = EditorState.createWithContent(contentState);
+    return editorState;
+  }
+
+  const onEditorStateChange = (editorState) => {
+    setEditorState(editorState);
+    console.log("PROPS ==> ", props);
+    return props.onChange(
+      draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    );
+  };
+
+  return (
+    <>
+      <div className="editor">
+        <Editor
+          editorState={editorState}
+          wrapperClassName="wrapper-class"
+          editorClassName="editor-class"
+          onEditorStateChange={onEditorStateChange}
+        />
+      </div>
+    </>
+  );
+};
+
+export default WYSIWYGEditor;
+
+
+import React, { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import WYSIWYGEditor from "./Editor";
+
+
+const Edit = ({ match }) => {
+  const { id } = match.params;
+
+
+  const { handleSubmit, control } = useForm({
+    mode: "onChange",
+  });
+
+  // Handle Data Submit to APi for SignUp
+  const handleSubmitOnClick = ({ editor_content }) => {
+    console.log("editor_content ==> ", editor_content);
+  };
+
+  return (
+    <section>
+      <form onSubmit={handleSubmit(handleSubmitOnClick)}>
+        <Controller
+          as={<WYSIWYGEditor />}
+          name="editor_content"
+          control={control}
+          id={id}
+        />
+        <button type="submit" className="signup-button">
+          Speichern
+        </button>
+      </form>
+    </section>
+  );
+};
+export { Edit };
+
