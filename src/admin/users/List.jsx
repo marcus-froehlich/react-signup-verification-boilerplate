@@ -23,15 +23,14 @@ function List({ match }) {
 
     return (
         <div>
-            <h1>Users</h1>
-            <p>All users from secure (admin only) api end point:</p>
-            <Link to={`${path}/add`} className="btn btn-sm btn-success mb-2">Add User</Link>
+            <h1>Benutzer</h1>            
+            <Link to={`${path}/add`} className="btn mb-2">Neuen Benutzer anlegen</Link>
             <table className="table table-striped">
                 <thead>
                     <tr>
                         <th style={{ width: '30%' }}>Name</th>
                         <th style={{ width: '30%' }}>Email</th>
-                        <th style={{ width: '30%' }}>Role</th>
+                        <th style={{ width: '30%' }}>Rolle</th>
                         <th style={{ width: '10%' }}></th>
                     </tr>
                 </thead>
@@ -42,11 +41,11 @@ function List({ match }) {
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td style={{ whiteSpace: 'nowrap' }}>
-                                <Link to={`${path}/edit/${user.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>
-                                <button onClick={() => deleteUser(user.id)} className="btn btn-sm btn-danger" style={{ width: '60px' }} disabled={user.isDeleting}>
+                                <Link to={`${path}/edit/${user.id}`} className="btn mr-1">Editieren</Link>
+                                <button onClick={() => deleteUser(user.id)} className="btn" style={{ width: '100px' }} disabled={user.isDeleting}>
                                     {user.isDeleting 
                                         ? <span className="spinner-border spinner-border-sm"></span>
-                                        : <span>Delete</span>
+                                        : <span>Löschen</span>
                                     }
                                 </button>
                             </td>

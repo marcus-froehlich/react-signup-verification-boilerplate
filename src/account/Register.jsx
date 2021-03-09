@@ -13,7 +13,7 @@ function Register({ history }) {
         email: '',
         password: '',
         confirmPassword: '',
-        acceptTerms: false
+        acceptTerms: true
     };
 
     const validationSchema = Yup.object().shape({

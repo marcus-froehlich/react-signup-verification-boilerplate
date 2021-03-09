@@ -16,6 +16,13 @@ module.exports = {
                     { loader: 'css-loader' },
                     { loader: 'less-loader' }
                 ]
+            },
+            {
+                test: /\.css?$/, 
+                use:  [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' }
+                ]
             }
         ]
     },
@@ -26,9 +33,11 @@ module.exports = {
             '@': path.resolve(__dirname, 'src/'),
         }
     },
+    
     plugins: [new HtmlWebpackPlugin({
         template: './src/index.html'
     })],
+
     devServer: {
         historyApiFallback: true
     },

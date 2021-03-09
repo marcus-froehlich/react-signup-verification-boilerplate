@@ -21,24 +21,24 @@ function AddEdit({ history, match }) {
 
     const validationSchema = Yup.object().shape({
         title: Yup.string()
-            .required('Title is required'),
+            .required('Anrede wird benötigt'),
         firstName: Yup.string()
-            .required('First Name is required'),
+            .required('Vorname ist benötigt'),
         lastName: Yup.string()
-            .required('Last Name is required'),
+            .required('Nachname ist benötigt'),
         email: Yup.string()
-            .email('Email is invalid')
-            .required('Email is required'),
+            .email('Email ist ungültig')
+            .required('Email wird benötigt'),
         role: Yup.string()
-            .required('Role is required'),
+            .required('Eine Rolle muss gewählt werden'),
         password: Yup.string()
-            .concat(isAddMode ? Yup.string().required('Password is required') : null)
-            .min(6, 'Password must be at least 6 characters'),
+            .concat(isAddMode ? Yup.string().required('Passwort wird benötigt') : null)
+            .min(6, 'Das Password muss min. 6 Zeichen haben'),
         confirmPassword: Yup.string()
             .when('password', (password, schema) => {
-                if (password) return schema.required('Confirm Password is required');
+                if (password) return schema.required('Bitte das Passwort noch einmal eingeben');
             })
-            .oneOf([Yup.ref('password')], 'Passwords must match')
+            .oneOf([Yup.ref('password')], 'Das Passwort muss übereinstimmen')
     });
 
     function onSubmit(fields, { setStatus, setSubmitting }) {
@@ -53,7 +53,7 @@ function AddEdit({ history, match }) {
     function createUser(fields, setSubmitting) {
         accountService.create(fields)
             .then(() => {
-                alertService.success('User added successfully', { keepAfterRouteChange: true });
+                alertService.success('Das Anlegen des Users war erfolgreich', { keepAfterRouteChange: true });
                 history.push('.');
             })
             .catch(error => {
@@ -65,7 +65,7 @@ function AddEdit({ history, match }) {
     function updateUser(id, fields, setSubmitting) {
         accountService.update(id, fields)
             .then(() => {
-                alertService.success('Update successful', { keepAfterRouteChange: true });
+                alertService.success('Update erfolgreich', { keepAfterRouteChange: true });
                 history.push('..');
             })
             .catch(error => {
@@ -89,26 +89,24 @@ function AddEdit({ history, match }) {
 
                 return (
                     <Form>
-                        <h1>{isAddMode ? 'Add User' : 'Edit User'}</h1>
+                        <h1>{isAddMode ? 'Benutzer anlegen' : 'Benutzer bearbeiten'}</h1>
                         <div className="form-row">
                             <div className="form-group col">
-                                <label>Title</label>
+                                <label>Titel</label>
                                 <Field name="title" as="select" className={'form-control' + (errors.title && touched.title ? ' is-invalid' : '')}>
                                     <option value=""></option>
-                                    <option value="Mr">Mr</option>
-                                    <option value="Mrs">Mrs</option>
-                                    <option value="Miss">Miss</option>
-                                    <option value="Ms">Ms</option>
+                                    <option value="Herr">Herr</option>
+                                    <option value="Frau">Frau</option>
                                 </Field>
                                 <ErrorMessage name="title" component="div" className="invalid-feedback" />
                             </div>
                             <div className="form-group col-5">
-                                <label>First Name</label>
+                                <label>Vorname</label>
                                 <Field name="firstName" type="text" className={'form-control' + (errors.firstName && touched.firstName ? ' is-invalid' : '')} />
                                 <ErrorMessage name="firstName" component="div" className="invalid-feedback" />
                             </div>
                             <div className="form-group col-5">
-                                <label>Last Name</label>
+                                <label>Nachname</label>
                                 <Field name="lastName" type="text" className={'form-control' + (errors.lastName && touched.lastName ? ' is-invalid' : '')} />
                                 <ErrorMessage name="lastName" component="div" className="invalid-feedback" />
                             </div>
@@ -120,7 +118,7 @@ function AddEdit({ history, match }) {
                                 <ErrorMessage name="email" component="div" className="invalid-feedback" />
                             </div>
                             <div className="form-group col">
-                                <label>Role</label>
+                                <label>Rolle</label>
                                 <Field name="role" as="select" className={'form-control' + (errors.role && touched.role ? ' is-invalid' : '')}>
                                     <option value=""></option>
                                     <option value="User">User</option>
@@ -131,18 +129,18 @@ function AddEdit({ history, match }) {
                         </div>
                         {!isAddMode &&
                             <div>
-                                <h3 className="pt-3">Change Password</h3>
-                                <p>Leave blank to keep the same password</p>
+                                <h3 className="pt-3">Passwort ändern</h3>
+                                <p>Leer lassen, wenn keine änderung gewünscht</p>
                             </div>
                         }
                         <div className="form-row">
                             <div className="form-group col">
-                                <label>Password</label>
+                                <label>Passwort</label>
                                 <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
                                 <ErrorMessage name="password" component="div" className="invalid-feedback" />
                             </div>
                             <div className="form-group col">
-                                <label>Confirm Password</label>
+                                <label>Passwort wiederholen</label>
                                 <Field name="confirmPassword" type="password" className={'form-control' + (errors.confirmPassword && touched.confirmPassword ? ' is-invalid' : '')} />
                                 <ErrorMessage name="confirmPassword" component="div" className="invalid-feedback" />
                             </div>
@@ -150,9 +148,9 @@ function AddEdit({ history, match }) {
                         <div className="form-group">
                             <button type="submit" disabled={isSubmitting} className="btn btn-primary">
                                 {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-                                Save
+                                Speichern
                             </button>
-                            <Link to={isAddMode ? '.' : '..'} className="btn btn-link">Cancel</Link>
+                            <Link to={isAddMode ? '.' : '..'} className="btn btn-link">Abbrechen</Link>
                         </div>
                     </Form>
                 );
