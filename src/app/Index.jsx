@@ -6,7 +6,7 @@ import { accountService } from '@/_services';
 import { Nav, PrivateRoute, Alert } from '@/_components';
 import { Home } from '@/home';
 import { Profile } from '@/profile';
-import { Admin } from '@/admin';
+import Admin from '@/admin';
 import { Account } from '@/account';
 
 function App() {

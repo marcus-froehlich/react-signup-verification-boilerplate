@@ -3,10 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 
 import { Overview } from './Overview';
 import { Users } from './users';
-import { Recruiting } from './recruiting';
+import Recruiting from './recruiting';
 
 // Pfad für die Componenten im Adminbereich
-function Admin({ match }) {
+const Admin = ({ match }) => {
     const { path } = match;
 
     return (
@@ -22,4 +22,4 @@ function Admin({ match }) {
     );
 }
 
-export { Admin };
+export default Admin;

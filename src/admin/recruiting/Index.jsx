@@ -3,11 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 
 import { List } from './List';
 import { Add } from './Add';
-import { Edit } from './Edit';
+import Edit from './Edit';
 
-function Recruiting({ match }) {
-    const { path } = match;
-    
+const Recruiting = ({ match }) => {
+    const { path } = match;    
     return (
         <Switch>
             <Route exact path={path} component={List} />
@@ -17,4 +16,4 @@ function Recruiting({ match }) {
     );
 }
 
-export { Recruiting };
+export default Recruiting;
