@@ -1,50 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, ContentState } from "draft-js";
+import { EditorState, ContentState, convertToRaw } from "draft-js";
 import { recruitingService } from "@/_services";
-import htmlToDraft from 'html-to-draftjs';
+import htmlToDraft from "html-to-draftjs";
 
+function Edit({ match }) {
+  const { path } = match;
+  const [edit, setEdit] = useState({ html: "", isFetching: false });
 
-export default class Edit extends React.Component {
-  constructor(props) {
-    super(props);
-    const content = recruitingService.getById(props.match.params.id);
-    const contentState = ContentState.createFromBlockArray(content);
-    const editorState = EditorState.createWithContent(contentState);
-
-    this.state = {
-      contentState,
-      editorState,
-      content
+  useEffect(() => {
+    const fetchHTML = () => {
+      try {
+        const data = recruitingService
+          .getById(match.params.id)
+          .then((data) =>
+            setEdit({ html: data.recruitingText, isFetching: true })
+          );
+      } catch (e) {
+        console.log(e);
+      }
     };
-  }
+    fetchHTML();
+  }, []);
 
-  onContentStateChange = contentState => {
-    this.setState({
-      contentState
-    });
-  };
+  let _html = htmlToDraft(edit.html);
+  let _contentState = ContentState.createFromBlockArray(
+    _html.contentBlocks,
+    _html.entityMap
+  );
+  const raw = convertToRaw(_contentState);
+  const [contentState, setContentState] = useState(raw);
 
-  onEditorStateChange = editorState => {
-    this.setState({
-      editorState
-    });
-  };
 
-  render() {
-    const { editorState } = this.state;
-    const { content } = this.state;
-    const blocksFromHtml = htmlToDraft(content);
-    console.log(blocksFromHtml);
+  if (edit.isFetching) {
     return (
-      <div className="Edit">
+      <div className="editor">
         <Editor
-          editorClassName={"report-editor"}
-          editorState={editorState}
-          onEditorStateChange={this.onEditorStateChange}
-          onContentStateChange={this.onContentStateChange}
+          editorState={EditorState.createWithContent(_contentState)}
+          onContentStateChange={setContentState}
+          wrapperClassName="wrapper-class"
+          editorClassName="editor-class"
         />
       </div>
     );
+  } else {
+    return <span className="spinner-border spinner-border-sm"></span>;
   }
 }
+export { Edit };
