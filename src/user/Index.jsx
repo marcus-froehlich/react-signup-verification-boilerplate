@@ -24,7 +24,7 @@ function index({ match }) {
                 <Card>
                   <Card.Header>
                     <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                      Stellenausschreibung mit der ID: {recruiting.id}
+                      Stellenausschreibung mit der ID: {recruiting.title}
                     </Accordion.Toggle>
                   </Card.Header>
                   <Accordion.Collapse eventKey="1">

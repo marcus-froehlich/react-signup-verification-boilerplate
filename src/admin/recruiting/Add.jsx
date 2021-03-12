@@ -29,9 +29,12 @@ class EditorConvertToHTML extends Component {
 
   handleSubmit(event) {
     var htmlText = document.getElementById("draftAreaHidden").value;
-    recruitingService.create(htmlText)
-    .then(() => {alertService.success("Eintragung erfolgreich");
-    <Redirect to={{path: `/admin/`}}/>});
+    var title = document.getElementById("inputTitle").value;
+    var model = {"recruitingText": htmlText, "title": title }
+    recruitingService
+      .create(model)
+      .then(() => { alertService.success("Eintragung erfolgreich"); setTimeout(() => {}, 2000); })      
+      .then(() => location.reload());
 
     event.preventDefault();
   }
@@ -40,13 +43,14 @@ class EditorConvertToHTML extends Component {
     const { editorState } = this.state;
     return (
       <div className="box-recruiting">
+        <form onSubmit={this.handleSubmit} encType="text/plain">
+          <input id="inputTitle" type="text" placeholder="Aussagekräftige Überschrift" className="mb-3 p-2"/>
         <Editor
           editorState={editorState}
           wrapperClassName="editor-wrapper"
           editorClassName="editor"
           onEditorStateChange={this.onEditorStateChange}
         />
-        <form onSubmit={this.handleSubmit} encType="text/plain">
           <div className="mr-0 w-25">
             <input className="btn" type="submit" value="Speichern" />
           </div>

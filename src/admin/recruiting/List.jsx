@@ -18,6 +18,15 @@ function List({ match }) {
     recruitingService.getById(id).then((data) => setSingle(data));
   }
 
+  function deleteRecruitment(id) {
+    recruitingService.delete(id).then(() =>
+      recruitingService
+        .getAll()
+        .then((x) => setRecruitings(x))
+        .then(() => location.reload())
+    );
+  }
+
   return (
     <div className="recruitingContainer">
       <div className="header_recruitment">
@@ -26,7 +35,7 @@ function List({ match }) {
       <div className="recruitingContent_small">
         <div>
           <label>
-          <input type="text" className="input-search"></input>
+            <input type="text" className="input-search"></input>
           </label>
           <Link to={`${path}/add`} className="btn">
             Stellenanzeige anlegen
@@ -36,30 +45,33 @@ function List({ match }) {
         <div className="recruitinContainer_small_scroll" id="style-1">
           {recruitings &&
             recruitings
-            .sort((a, b) => b.id - a.id)
-            .map((recruiting) => (
-              <div key={recruiting.id}>
-                <a id={recruiting.id}>
-                  <Card border="secondary" style={{ width: "18rem" }}>
-                    <Card.Header>{recruiting.title}</Card.Header>
-                    <Card.Body>
-                      <Card.Title>
-                      </Card.Title>
-                      <Card.Text>
-                        <span>
-                          {Moment(recruiting.date).format("DD.MM.YYYY")}
-                        </span><br/>
-                        
-                        <button className="mt-3" onClick={() => handleClick(recruiting.id)}>
-                          Details
-                        </button>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </a>
-                <br />
-              </div>
-            ))}
+              .sort((a, b) => b.id - a.id)
+              .map((recruiting) => (
+                <div key={recruiting.id}>
+                  <a id={recruiting.id}>
+                    <Card border="secondary" style={{ width: "18rem" }}>
+                      <Card.Header>{recruiting.title}</Card.Header>
+                      <Card.Body>
+                        <Card.Title></Card.Title>
+                        <Card.Text>
+                          <span>
+                            Erstellt am:{" "}
+                            {Moment(recruiting.date).format("DD.MM.YYYY")}
+                          </span>
+                          <br />
+                          <button
+                            className="mt-3"
+                            onClick={() => handleClick(recruiting.id)}
+                          >
+                            Details
+                          </button>
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </a>
+                  <br />
+                </div>
+              ))}
           {!recruitings && (
             <table>
               <tbody>
@@ -77,15 +89,26 @@ function List({ match }) {
         {single && (
           <div>
             <div className="btn-edit-recruiting">
-              <Link
-                to={`${path}/edit/${single.id}`}
-                className="btn"
-              >
+              <Link to={`${path}/edit/${single.id}`} className="btn">
                 Editieren
               </Link>
+              <button
+                onClick={() => deleteRecruitment(single.id)}
+                className="btn ml-2"
+                style={{ width: "100px" }}
+                disabled={single.isDeleting}
+              >
+                {single.isDeleting ? (
+                  <span className="spinner-border spinner-border-sm"></span>
+                ) : (
+                  <span>Löschen</span>
+                )}
+              </button>
             </div>
             <div className="recruitinContainer_big_scroll mb-2" id="style-1">
-            <div dangerouslySetInnerHTML={{ __html: single.recruitingText }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: single.recruitingText }}
+              />
             </div>
           </div>
         )}

@@ -8,6 +8,7 @@ export const recruitingService = {
     getAll,
     getById,
     create,
+    delete: _delete,
 };
 
 function getAll() {
@@ -20,4 +21,8 @@ function getById(id) {
 
 function create(params) {
     return fetchWrapper.post(baseUrl, params);
+}
+
+function _delete(id) {
+    return fetchWrapper.delete(`${baseUrl}/${id}`);
 }
