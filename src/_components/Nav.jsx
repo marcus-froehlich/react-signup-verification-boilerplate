@@ -25,6 +25,12 @@ function Nav() {
           <NavLink to="/profile" className="nav-item nav-link">
             Profil
           </NavLink>
+          {/* TODO Adminrolle entfernen */}
+          {user.role === Role.User && (
+            <NavLink to="/user" className="nav-item nav-link">
+              Stellenausschreibungen
+            </NavLink>
+          )}
           {user.role === Role.Admin && (
             <NavLink to="/admin" className="nav-item nav-link">
               Admin
@@ -47,7 +53,7 @@ function AdminNav({ match }) {
     <nav className="admin-nav navbar navbar-expand navbar-light">
       <div className="navbar-nav">
         <NavLink to={`${path}`} className="nav-item nav-link">
-          [ Admin ] 
+          [ Admin ]
         </NavLink>
         <NavLink to={`${path}/users`} className="nav-item nav-link">
           [ Benutzer verwalten ]

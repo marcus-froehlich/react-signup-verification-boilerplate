@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
+    entry: ['@babel/polyfill', './src/index.jsx'],
     module: {
         rules: [
             {
