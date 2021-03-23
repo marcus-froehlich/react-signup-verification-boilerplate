@@ -18,6 +18,10 @@ function List({ match }) {
     recruitingService.getById(id).then((data) => setSingle(data));
   }
 
+  function applyingUser(id) {
+    recruitingService.userApplying(id);
+  }
+
   function deleteRecruitment(id) {
     recruitingService.delete(id).then(() =>
       recruitingService
@@ -92,6 +96,10 @@ function List({ match }) {
               <Link to={`${path}/edit/${single.id}`} className="btn">
                 Editieren
               </Link>
+              <button
+              onClick={() => applyingUser(single.id)}
+              className="btn ml-2"            
+              >Test Bewerbung</button>
               <button
                 onClick={() => deleteRecruitment(single.id)}
                 className="btn ml-2"

@@ -9,12 +9,35 @@ function FileUploadPage() {
     setIsFilePicked(true);
   };
 
+  const mimetype = [
+    "application/doc",
+    "application/ms-doc",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/pdf",
+  ];
+
   const handleSubmission = () => {
     const formData = new FormData();
-
+    let reader = new FileReader();
+    console.log(e.target.files);
     formData.append("File", selectedFile);
 
-    // fetch("https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5", {
+    const formatCheck = mimetype.some((item) => {
+      return item === selectedFile.type;
+    });
+
+    // ca. 4 MB
+    function sizeCheck(e) {
+      return e.size < 4200000;
+    }
+
+    if (formatCheck && sizeCheck(selectedFile)) {     
+    } else {
+      console.log("falsches Format oder falsche Größe");
+    }
+
+    // fetch("http://localhost:8080/user/Dokuments/upload", {
     //   method: "POST",
     //   body: formData,
     // })
@@ -29,7 +52,15 @@ function FileUploadPage() {
 
   return (
     <div>
-      <input type="file" name="file" onChange={changeHandler} />
+      <label htmlFor="file-upload" className="custom-file-upload">
+        <i className="fa fa-cloud-upload"></i> Custom Upload
+      </label>
+      <input
+        type="file"
+        name="file"
+        id="file-upload"
+        onChange={changeHandler}
+      />
       {isFilePicked ? (
         <div>
           <p>Filename: {selectedFile.name}</p>

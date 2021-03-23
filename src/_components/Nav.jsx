@@ -25,10 +25,14 @@ function Nav() {
           <NavLink to="/profile" className="nav-item nav-link">
             Profil
           </NavLink>
-          {/* TODO Adminrolle entfernen */}
           {user.role === Role.User && (
             <NavLink to="/user" className="nav-item nav-link">
               Stellenausschreibungen
+            </NavLink>
+          )}
+          {user.role === Role.User && (
+            <NavLink to="/user/document" className="nav-item nav-link">
+              Dokumentenverwaltung
             </NavLink>
           )}
           {user.role === Role.Admin && (
