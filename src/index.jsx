@@ -6,6 +6,7 @@ import { history } from './_helpers';
 import { accountService } from './_services';
 import { App } from './app';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.less';
 
 // attempt silent token refresh before startup

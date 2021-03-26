@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { accountService, uploadService, alertService } from "@/_services";
 
 function FileUploadPage() {
   const [selectedFile, setSelectedFile] = useState();
-  const [isFilePicked, setIsFilePicked] = useState(false);
+
+  const user = accountService.userValue;
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
-    setIsFilePicked(true);
   };
 
   const mimetype = [
@@ -17,11 +18,11 @@ function FileUploadPage() {
     "application/pdf",
   ];
 
-  const handleSubmission = () => {
-    const formData = new FormData();
-    let reader = new FileReader();
-    console.log(e.target.files);
-    formData.append("File", selectedFile);
+  const handleSubmission = (event) => {
+    event.preventDefault();
+    const data = new FormData();
+    data.append("file", selectedFile);
+
 
     const formatCheck = mimetype.some((item) => {
       return item === selectedFile.type;
@@ -32,22 +33,11 @@ function FileUploadPage() {
       return e.size < 4200000;
     }
 
-    if (formatCheck && sizeCheck(selectedFile)) {     
+    if (formatCheck && sizeCheck(selectedFile)) {
+      uploadService.upload(data, user.id)
     } else {
       console.log("falsches Format oder falsche Größe");
     }
-
-    // fetch("http://localhost:8080/user/Dokuments/upload", {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     console.log("Success:", result);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
   };
 
   return (
@@ -61,19 +51,6 @@ function FileUploadPage() {
         id="file-upload"
         onChange={changeHandler}
       />
-      {isFilePicked ? (
-        <div>
-          <p>Filename: {selectedFile.name}</p>
-          <p>Filetype: {selectedFile.type}</p>
-          <p>Size in bytes: {selectedFile.size}</p>
-          <p>
-            lastModifiedDate:{" "}
-            {selectedFile.lastModifiedDate.toLocaleDateString()}
-          </p>
-        </div>
-      ) : (
-        <p>Select a file to show details</p>
-      )}
       <div>
         <button onClick={handleSubmission}>Submit</button>
       </div>
