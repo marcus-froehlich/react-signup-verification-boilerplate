@@ -26,7 +26,7 @@ function Overview({ match }) {
     <> 
     <div className="mt-5 mb-5 justify-content-center">      
       {recruitings &&
-        recruitings
+        recruitings.recruitment
           .sort((a, b) => b.id - a.id)
           .map((recruiting) => (
             <div key={recruiting.id} className="d-flex justify-content-center">

@@ -30,10 +30,10 @@ function post(url, body) {
 }
 
 function upload(url, data) {
-    axios.post(url, data, {
-        headers: { "Content-Type": data.type, ...authHeader(url) },
-    })
-    .then(() => { alertService.success("Eintragung erfolgreich"); setTimeout(() => {}, 2000); })      
+  axios.post(url, data, {
+    headers: { "Content-Type": data.type, ...authHeader(url) },
+  })
+    .then(() => { alertService.success("Eintragung erfolgreich"); setTimeout(() => { }, 2000); })
     .then(() => location.reload());
 }
 
@@ -91,7 +91,6 @@ function handleResponse(response) {
       console.log(data);
       return Promise.reject(error);
     }
-
     return data;
   });
 }

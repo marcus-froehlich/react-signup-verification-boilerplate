@@ -7,15 +7,20 @@ import { recruitingService } from "@/_services";
 
 function List({ match }) {
   const { path } = match;
+  const [applieduser, setAppliedUser] = useState([]);
   const [recruitings, setRecruitings] = useState(null);
   const [single, setSingle] = useState(null);
 
   useEffect(() => {
-    recruitingService.getAll().then((x) => setRecruitings(x));
+    recruitingService.getAll().then((x) => { setRecruitings(x) });
   }, []);
 
   function handleClick(id) {
-    recruitingService.getById(id).then((data) => setSingle(data));
+    recruitingService.getById(id)
+    .then(data => {
+      setSingle(data);
+      setAppliedUser(data.appliedUser);
+    });
   }
 
   function applyingUser(id) {
@@ -30,7 +35,6 @@ function List({ match }) {
         .then(() => location.reload())
     );
   }
-
   return (
     <div className="recruitingContainer">
       <div className="header_recruitment">
@@ -47,35 +51,32 @@ function List({ match }) {
         </div>
         <br />
         <div className="recruitinContainer_small_scroll" id="style-1">
-          {recruitings &&
-            recruitings
-              .sort((a, b) => b.id - a.id)
-              .map((recruiting) => (
-                <div key={recruiting.id}>
-                  <a id={recruiting.id}>
-                    <Card border="secondary" style={{ width: "18rem" }}>
-                      <Card.Header>{recruiting.title}</Card.Header>
-                      <Card.Body>
-                        <Card.Title></Card.Title>
-                        <Card.Text>
-                          <span>
-                            Erstellt am:{" "}
-                            {Moment(recruiting.date).format("DD.MM.YYYY")}
-                          </span>
-                          <br />
-                          <button
-                            className="mt-3"
-                            onClick={() => handleClick(recruiting.id)}
-                          >
-                            Details
+          {recruitings && recruitings.recruitment.sort((a, b) => b.id - a.id).map((recruiting) => (
+            <div key={recruiting.id}>
+              <a id={recruiting.id}>
+                <Card border="secondary" style={{ width: "18rem" }}>
+                  <Card.Header>{recruiting.title}</Card.Header>
+                  <Card.Body>
+                    <Card.Title></Card.Title>
+                    <Card.Text>
+                      <span>
+                        Erstellt am:{" "}
+                        {Moment(recruiting.date).format("DD.MM.YYYY")}
+                      </span>
+                      <br />
+                      <button
+                        className="mt-3"
+                        onClick={() => handleClick(recruiting.id)}
+                      >
+                        Details
                           </button>
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </a>
-                  <br />
-                </div>
-              ))}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </a>
+              <br />
+            </div>
+          ))}
           {!recruitings && (
             <table>
               <tbody>
@@ -93,13 +94,12 @@ function List({ match }) {
         {single && (
           <div>
             <div className="btn-edit-recruiting">
+              <Link to={{
+                pathname: `${path}/applicants`,
+                applieduser }} className="btn">{single.appliedUser.length} Bewerber</Link>
               <Link to={`${path}/edit/${single.id}`} className="btn">
                 Editieren
               </Link>
-              <button
-              onClick={() => applyingUser(single.id)}
-              className="btn ml-2"            
-              >Test Bewerbung</button>
               <button
                 onClick={() => deleteRecruitment(single.id)}
                 className="btn ml-2"
