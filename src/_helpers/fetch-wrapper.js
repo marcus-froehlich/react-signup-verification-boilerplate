@@ -51,6 +51,7 @@ function put(url, body) {
     headers: { "Content-Type": "application/json", ...authHeader(url) },
     body: JSON.stringify(body),
   };
+  console.log(requestOptions);
   return fetch(url, requestOptions).then(handleResponse);
 }
 

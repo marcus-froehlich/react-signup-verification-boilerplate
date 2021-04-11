@@ -10,6 +10,7 @@ export const recruitingService = {
     getById,
     isUserApplied,
     create,
+    put,
     userApplying,
     delete: _delete,
 };
@@ -26,12 +27,16 @@ function create(params) {
     return fetchWrapper.post(baseUrl, params);
 }
 
+function put(params) {
+    return fetchWrapper.put(baseUrl, params);
+}
+
 function _delete(id) {
     return fetchWrapper.delete(`${baseUrl}/${id}`);
 }
 
-function userApplying(id, userId){
-    return fetchWrapper.post(`${applyingUrl}/${id}/${userId}`);
+function userApplying(id, userId, docs){
+    return fetchWrapper.post(`${applyingUrl}/${id}/${userId}`, docs);
 }
 
 function isUserApplied(id) {

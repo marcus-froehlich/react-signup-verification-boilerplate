@@ -52,7 +52,7 @@ function FileUploadPage() {
         onChange={changeHandler}
       />
       <div>
-        <button onClick={handleSubmission}>Submit</button>
+        <button onClick={handleSubmission}>Hochladen</button>
       </div>
     </div>
   );

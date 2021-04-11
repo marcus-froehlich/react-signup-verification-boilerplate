@@ -9,6 +9,7 @@ function Home() {
         <div className="p-4">
             <div className="container">
                 <h1>Hallo {user.firstName}!</h1>
+                <button className="btn">Test Sass Button</button>
                 <p></p>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
-import { recruitingService } from "@/_services";
+import { recruitingService, alertService } from "@/_services";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 
@@ -16,7 +16,7 @@ export default class _Editor extends Component {
     this.state = {
       id: props.id,
       loading: false,
-      editorState: null,
+      editorState: null
     };
   }
 
@@ -41,7 +41,11 @@ export default class _Editor extends Component {
   };
 
   update = () => {
-    this.setState({ convertedContent: convertToHTML(this.state.editorState.getCurrentContent()) });
+    //this.setState({ "convertedContent": draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())) });
+    var model = {"id": this.state.id, "recruitingText": draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))}
+    recruitingService.put(model)
+    .then(() => { alertService.success("Speichern erfolgreich"); setTimeout(() => {}, 2000); })      
+    .then(() => location.reload());
   }
 
   handleLoad = async () => {

@@ -35,6 +35,11 @@ function Nav() {
               Dokumentenverwaltung
             </NavLink>
           )}
+          {user.role === Role.User && (
+            <NavLink to="/user/user_quick_application" className="nav-item nav-link">
+              Quick
+            </NavLink>
+          )}
           {user.role === Role.Admin && (
             <NavLink to="/admin" className="nav-item nav-link">
               Admin
