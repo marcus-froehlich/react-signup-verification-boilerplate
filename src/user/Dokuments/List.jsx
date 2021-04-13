@@ -4,7 +4,6 @@ import Moment from "moment";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 import { accountService, uploadService, alertService } from "@/_services";
 
 function List() {
@@ -32,7 +31,7 @@ function List() {
   return (
     <>
       <div className="container mt-3">
-        <Table striped bordered hover variant="dark">
+        <Table striped bordered hover>
           <thead>
             <tr>
               <th>#</th>

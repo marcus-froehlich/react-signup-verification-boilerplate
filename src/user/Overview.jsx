@@ -66,7 +66,7 @@ function Overview({ match }) {
         </Modal.Header>
         <Modal.Body>
           <p>Wenn Sie sich für diese Stelle bewerben möchten, welche Dateien möchten Sie bereitstellen?</p>
-          <Table striped bordered hover variant="dark">
+          <Table striped bordered hover>
           <thead>
             <tr>
               <th>Dokumenten Name</th>
@@ -117,30 +117,30 @@ function Overview({ match }) {
 
   return (
     <>
-      <div className="mt-5 mb-5 justify-content-center">
+      <div>
         {show ? <ModalContent /> : null}
         {recruitings &&
           recruitings.recruitment
             .map((recruiting, index) => (
-              <div key={index} className="d-flex justify-content-center">
-                <Accordion defaultActiveKey="0" className="mb-2">
+              <div key={index}>
+                <Accordion defaultActiveKey="0">
                   <Card>
                     <Card.Header>
-                      <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                      <Accordion.Toggle as={Button} className="btn-e" eventKey="1">
                         Stellenausschreibung mit dem Titel: {recruiting.title}
                       </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
-                        <button
+                      <Button className="btn-e"
                           onClick={() => infoEvents(recruiting)}
                           // onClick={() => applyingUser(recruiting.id, user.id)}
-                          className="btn ml-2"
+                          
                         >
                           Auf diese Stelle Bewerben
-                          </button>
-                        <div
-                          className="m-2"
+                          </Button>
+                        <div   
+                        className="m-2"                       
                           dangerouslySetInnerHTML={{
                             __html: recruiting.recruitingText,
                           }}

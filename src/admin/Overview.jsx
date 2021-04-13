@@ -17,7 +17,7 @@ function Overview({ match }) {
           <Card.Text>
             <span>
               <Link to={`${path}/users`}>Benutzer verwalten</Link>
-            </span><br/>
+            </span><br />
             <span>
               <Link to={`${path}/recruiting`}>Stellenübersicht</Link>
             </span>

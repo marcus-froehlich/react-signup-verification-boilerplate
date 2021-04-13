@@ -16,63 +16,78 @@ function Nav() {
   if (!user) return null;
 
   return (
-    <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <div className="navbar-nav">
-          <NavLink exact to="/" className="nav-item nav-link">
-            Home
-          </NavLink>
-          <NavLink to="/profile" className="nav-item nav-link">
-            Profil
-          </NavLink>
-          {user.role === Role.User && (
-            <NavLink to="/user" className="nav-item nav-link">
-              Stellenausschreibungen
-            </NavLink>
-          )}
-          {user.role === Role.User && (
-            <NavLink to="/user/document" className="nav-item nav-link">
-              Dokumentenverwaltung
-            </NavLink>
-          )}
-          {user.role === Role.User && (
-            <NavLink to="/user/user_quick_application" className="nav-item nav-link">
-              Quick
-            </NavLink>
-          )}
-          {user.role === Role.Admin && (
-            <NavLink to="/admin" className="nav-item nav-link">
-              Admin
-            </NavLink>
-          )}
-          <a onClick={accountService.logout} className="nav-item nav-link">
-            Logout
+    <div className="navigation">
+      <ul>
+        <li>
+          <a href="/">
+            <span className="icon"><i className="fa fa-apple" aria-hidden="true"></i></span>
+            <span className="title">
+              <h4>InFact Recruiting</h4>
+            </span>
           </a>
-        </div>
-      </nav>
-      <Route path="/admin" component={AdminNav} />
+        </li>
+        <li>
+          <a href="/">
+            <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
+            <span className="title">Dashboard</span>
+          </a>
+        </li>
+        {user.role === Role.User && (
+          <li>
+            <a href="/user">
+              <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
+              <span className="title">Stellenausschreibungen</span>
+            </a>
+          </li>
+        )}
+        {user.role === Role.User && (
+          <li>
+            <a href="/user/document">
+              <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
+              <span className="title">Dokumentenverwaltung</span>
+            </a>
+          </li>
+        )}
+        {user.role === Role.User && (
+          <li>
+            <a href="/user/user_quick_application">
+              <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
+              <span className="title">Quick</span>
+            </a>
+          </li>
+        )}
+        {user.role === Role.Admin && (
+          <li>
+            <a href="/admin">
+              <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
+              <span className="title">Admin</span>
+            </a>
+          </li>
+        )}
+        <li>
+          <a href="/profile">
+            <span className="icon"><i className="fa fa-cog" aria-hidden="true"></i></span>
+            <span className="title">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a onClick={accountService.logout} href="#">
+            <span className="icon"><i className="fa fa-lock" aria-hidden="true"></i></span>
+            <span className="title">LogOut</span>
+          </a>
+        </li>
+      </ul>
     </div>
+
+    // <Route path="/admin" component={AdminNav} />
+
   );
 }
 
 function AdminNav({ match }) {
   const { path } = match;
 
-  return (
-    <nav className="admin-nav navbar navbar-expand navbar-light">
-      <div className="navbar-nav">
-        <NavLink to={`${path}`} className="nav-item nav-link">
-          [ Admin ]
-        </NavLink>
-        <NavLink to={`${path}/users`} className="nav-item nav-link">
-          [ Benutzer verwalten ]
-        </NavLink>
-        <NavLink to={`${path}/recruiting`} className="nav-item nav-link">
-          [ Stellenübersicht ]
-        </NavLink>
-      </div>
-    </nav>
-  );
+  return (<div>"Admin Menu"</div>);
 }
 
 export { Nav };

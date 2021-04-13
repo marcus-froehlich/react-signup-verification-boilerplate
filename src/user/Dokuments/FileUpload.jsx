@@ -42,17 +42,17 @@ function FileUploadPage() {
 
   return (
     <div>
-      <label htmlFor="file-upload" className="custom-file-upload">
-        <i className="fa fa-cloud-upload"></i> Custom Upload
+      <label htmlFor="file-upload">
+        <i className="fa fa-cloud-upload"></i> Datei Hochladen
       </label>
       <input
         type="file"
         name="file"
-        id="file-upload"
+        id="file-upload" 
         onChange={changeHandler}
       />
       <div>
-        <button onClick={handleSubmission}>Hochladen</button>
+        <button type="button" className="btn-e" onClick={handleSubmission}>Hochladen</button>
       </div>
     </div>
   );
