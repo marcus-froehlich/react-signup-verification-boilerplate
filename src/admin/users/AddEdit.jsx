@@ -8,7 +8,7 @@ import { accountService, alertService } from '@/_services';
 function AddEdit({ history, match }) {
     const { id } = match.params;
     const isAddMode = !id;
-    
+
     const initialValues = {
         title: '',
         firstName: '',
@@ -88,71 +88,73 @@ function AddEdit({ history, match }) {
                 }, []);
 
                 return (
-                    <Form>
-                        <h1>{isAddMode ? 'Benutzer anlegen' : 'Benutzer bearbeiten'}</h1>
-                        <div className="form-row">
-                            <div className="form-group col">
-                                <label>Titel</label>
-                                <Field name="title" as="select" className={'form-control' + (errors.title && touched.title ? ' is-invalid' : '')}>
-                                    <option value=""></option>
-                                    <option value="Herr">Herr</option>
-                                    <option value="Frau">Frau</option>
-                                </Field>
-                                <ErrorMessage name="title" component="div" className="invalid-feedback" />
+                    <div className="container-xl">
+                        <Form>
+                            <h1>{isAddMode ? 'Benutzer anlegen' : 'Benutzer bearbeiten'}</h1>
+                            <div className="form-row">
+                                <div className="form-group col">
+                                    <label>Titel</label>
+                                    <Field name="title" as="select" className={'form-control' + (errors.title && touched.title ? ' is-invalid' : '')}>
+                                        <option value=""></option>
+                                        <option value="Herr">Herr</option>
+                                        <option value="Frau">Frau</option>
+                                    </Field>
+                                    <ErrorMessage name="title" component="div" className="invalid-feedback" />
+                                </div>
+                                <div className="form-group col-5">
+                                    <label>Vorname</label>
+                                    <Field name="firstName" type="text" className={'form-control' + (errors.firstName && touched.firstName ? ' is-invalid' : '')} />
+                                    <ErrorMessage name="firstName" component="div" className="invalid-feedback" />
+                                </div>
+                                <div className="form-group col-5">
+                                    <label>Nachname</label>
+                                    <Field name="lastName" type="text" className={'form-control' + (errors.lastName && touched.lastName ? ' is-invalid' : '')} />
+                                    <ErrorMessage name="lastName" component="div" className="invalid-feedback" />
+                                </div>
                             </div>
-                            <div className="form-group col-5">
-                                <label>Vorname</label>
-                                <Field name="firstName" type="text" className={'form-control' + (errors.firstName && touched.firstName ? ' is-invalid' : '')} />
-                                <ErrorMessage name="firstName" component="div" className="invalid-feedback" />
+                            <div className="form-row">
+                                <div className="form-group col-7">
+                                    <label>Email</label>
+                                    <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
+                                    <ErrorMessage name="email" component="div" className="invalid-feedback" />
+                                </div>
+                                <div className="form-group col">
+                                    <label>Rolle</label>
+                                    <Field name="role" as="select" className={'form-control' + (errors.role && touched.role ? ' is-invalid' : '')}>
+                                        <option value=""></option>
+                                        <option value="User">User</option>
+                                        <option value="Admin">Admin</option>
+                                    </Field>
+                                    <ErrorMessage name="role" component="div" className="invalid-feedback" />
+                                </div>
                             </div>
-                            <div className="form-group col-5">
-                                <label>Nachname</label>
-                                <Field name="lastName" type="text" className={'form-control' + (errors.lastName && touched.lastName ? ' is-invalid' : '')} />
-                                <ErrorMessage name="lastName" component="div" className="invalid-feedback" />
+                            {!isAddMode &&
+                                <div>
+                                    <h3 className="pt-3">Passwort ändern</h3>
+                                    <p>Leer lassen, wenn keine änderung gewünscht</p>
+                                </div>
+                            }
+                            <div className="form-row">
+                                <div className="form-group col">
+                                    <label>Passwort</label>
+                                    <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
+                                    <ErrorMessage name="password" component="div" className="invalid-feedback" />
+                                </div>
+                                <div className="form-group col">
+                                    <label>Passwort wiederholen</label>
+                                    <Field name="confirmPassword" type="password" className={'form-control' + (errors.confirmPassword && touched.confirmPassword ? ' is-invalid' : '')} />
+                                    <ErrorMessage name="confirmPassword" component="div" className="invalid-feedback" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-7">
-                                <label>Email</label>
-                                <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
-                                <ErrorMessage name="email" component="div" className="invalid-feedback" />
-                            </div>
-                            <div className="form-group col">
-                                <label>Rolle</label>
-                                <Field name="role" as="select" className={'form-control' + (errors.role && touched.role ? ' is-invalid' : '')}>
-                                    <option value=""></option>
-                                    <option value="User">User</option>
-                                    <option value="Admin">Admin</option>
-                                </Field>
-                                <ErrorMessage name="role" component="div" className="invalid-feedback" />
-                            </div>
-                        </div>
-                        {!isAddMode &&
-                            <div>
-                                <h3 className="pt-3">Passwort ändern</h3>
-                                <p>Leer lassen, wenn keine änderung gewünscht</p>
-                            </div>
-                        }
-                        <div className="form-row">
-                            <div className="form-group col">
-                                <label>Passwort</label>
-                                <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
-                                <ErrorMessage name="password" component="div" className="invalid-feedback" />
-                            </div>
-                            <div className="form-group col">
-                                <label>Passwort wiederholen</label>
-                                <Field name="confirmPassword" type="password" className={'form-control' + (errors.confirmPassword && touched.confirmPassword ? ' is-invalid' : '')} />
-                                <ErrorMessage name="confirmPassword" component="div" className="invalid-feedback" />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">
-                                {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                            <div className="form-group">
+                                <button type="submit" disabled={isSubmitting} className="btn-sub mr-2">
+                                    {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                                 Speichern
                             </button>
-                            <Link to={isAddMode ? '.' : '..'} className="btn btn-link">Abbrechen</Link>
-                        </div>
-                    </Form>
+                                <Link to={isAddMode ? '.' : '..'} className="btn-n">Abbrechen</Link>
+                            </div>
+                        </Form>
+                    </div>
                 );
             }}
         </Formik>

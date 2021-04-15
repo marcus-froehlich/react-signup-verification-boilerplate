@@ -35,7 +35,7 @@ function Nav() {
         {user.role === Role.User && (
           <li>
             <a href="/user">
-              <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
+              <span className="icon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
               <span className="title">Stellenausschreibungen</span>
             </a>
           </li>
@@ -43,7 +43,7 @@ function Nav() {
         {user.role === Role.User && (
           <li>
             <a href="/user/document">
-              <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
+              <span className="icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
               <span className="title">Dokumentenverwaltung</span>
             </a>
           </li>
@@ -51,15 +51,15 @@ function Nav() {
         {user.role === Role.User && (
           <li>
             <a href="/user/user_quick_application">
-              <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
-              <span className="title">Quick</span>
+              <span className="icon"><i class="fa fa-bolt" aria-hidden="true"></i></span>
+              <span className="title">Schnell Bewerbung</span>
             </a>
           </li>
         )}
         {user.role === Role.Admin && (
           <li>
             <a href="/admin">
-              <span className="icon"><i className="fa fa-home" aria-hidden="true"></i></span>
+              <span className="icon"><i class="fa fa-wrench" aria-hidden="true"></i></span>
               <span className="title">Admin</span>
             </a>
           </li>

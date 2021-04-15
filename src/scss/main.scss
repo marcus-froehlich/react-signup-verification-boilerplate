@@ -6,6 +6,10 @@
 @import './user';
 @import './cardBox';
 @import './recentNewUser';
+@import './container';
+@import './fileUpload';
+@import './documentUserConfirm';
+@import './recruiting';
 
 * {
     margin: 0;
@@ -17,6 +21,10 @@
 body {
     overflow-x: hidden;
 }
+
+a {
+    cursor: pointer;
+  }
 
 .container {
     position: relative;

@@ -85,7 +85,8 @@ export default class _Editor extends Component {
             onContentStateChange={this.onContentStateChange}
           />
         </div>
-        <button onClick={this.update}>Speichern</button>
+        <button className="btn-sub mr-2" onClick={this.update}>Speichern</button>
+        <button className="btn-n" onClick={() => {window.history.back()}}>Zurück</button>
       </div>
     );
   }

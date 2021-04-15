@@ -12,7 +12,6 @@ function getById(id){
     return fetchWrapper.get(baseUrl);
 }
 
-
 function upload(data, id) {
     const baseUrl = `${config.apiUrl}/FileUpload/${id}`
 

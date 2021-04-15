@@ -3,6 +3,7 @@ import { accountService, uploadService, alertService } from "@/_services";
 
 function FileUploadPage() {
   const [selectedFile, setSelectedFile] = useState();
+  const [upload, setUpload] = useState(false);
 
   const user = accountService.userValue;
 
@@ -34,18 +35,16 @@ function FileUploadPage() {
     }
 
     if (formatCheck && sizeCheck(selectedFile)) {
-      uploadService.upload(data, user.id)
+      setUpload(true);
+      uploadService.upload(data, user.id).then((response) => {setUpload(false)});
     } else {
       console.log("falsches Format oder falsche Größe");
     }
   };
 
   return (
-    <div>
-      <label htmlFor="file-upload">
-        <i className="fa fa-cloud-upload"></i> Datei Hochladen
-      </label>
-      <input
+    <div className="container-xs">
+      <input        
         type="file"
         name="file"
         id="file-upload" 
@@ -53,6 +52,7 @@ function FileUploadPage() {
       />
       <div>
         <button type="button" className="btn-e" onClick={handleSubmission}>Hochladen</button>
+        {upload ? <span className="spinner-border spinner-border-lg align-center"></span> : null}
       </div>
     </div>
   );

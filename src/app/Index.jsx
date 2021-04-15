@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 
 import { Role } from '@/_helpers';
 import { accountService } from '@/_services';
-import { PrivateRoute, Alert, Main} from '@/_components';
+import { PrivateRoute } from '@/_components';
 import { Home } from '@/home';
 import { Profile } from '@/profile';
 import Admin from '@/admin';
@@ -21,7 +21,6 @@ function App() {
 
     return (
         <div>
-            <Alert />
             <Switch>
                 <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
                 <PrivateRoute exact path="/" component={Home} />

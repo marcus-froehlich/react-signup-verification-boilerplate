@@ -2,6 +2,7 @@ import config from 'config';
 import { fetchWrapper } from '@/_helpers';
 
 const baseUrl = `${config.apiUrl}/QuickUserDocuments`;
+const deletUrl = `${config.apiUrl}/FileUpload`
 
 export const documentService = {
     get,
@@ -23,5 +24,5 @@ function put(params) {
 }
 
 function _delete(id) {
-    return fetchWrapper.delete(`${baseUrl}/${id}`);
+    return fetchWrapper.delete(`${deletUrl}/${id}`);
 }

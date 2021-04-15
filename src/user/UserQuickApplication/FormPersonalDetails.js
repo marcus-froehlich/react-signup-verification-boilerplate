@@ -23,63 +23,67 @@ export class FormPersonalDetails extends Component {
                     fullWidth
                     maxWidth='sm'
                 >
-                    <fieldset>
-                        <legend>Ihre Persönlichen Daten:</legend>
-                        <TextField
-                            placeholder="Ihr Vorname"
-                            label="Vorname"
-                            onChange={handleChange('firstName')}
-                            defaultValue={values.firstName}
-                            margin="normal"
-                            fullWidth
-                        />
-                        <br />
-                        <TextField
-                            placeholder="Ihr Nachname"
-                            label="Nachname"
-                            onChange={handleChange('lastName')}
-                            defaultValue={values.lastName}
-                            margin="normal"
-                            fullWidth
-                        />
-                        <br />
-                        <TextField
-                            placeholder="Ihre Email"
-                            label="Email"
-                            onChange={handleChange('email')}
-                            defaultValue={values.email}
-                            margin="normal"
-                            fullWidth
-                        />
-                        <br /><br />
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker
+                    <div className="container-modal">
+                        <fieldset>
+                            <legend>Ihre Persönlichen Daten:</legend>
+                            <TextField
+                                placeholder="Ihr Vorname"
+                                label="Vorname"
+                                onChange={handleChange('firstName')}
+                                defaultValue={values.firstName}
                                 margin="normal"
-                                id="date-picker-dialog"
-                                label="Ihr Geburtsdatum"
-                                format="dd/MM/yyyy"
-                                value={values.birthday}
-                                onChange={handleChangeDateBirthday()}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change date',
-                                }}
+                                fullWidth
                             />
-                        </MuiPickersUtilsProvider>
-                    </fieldset>
-                    <br />
+                            <br />
+                            <TextField
+                                placeholder="Ihr Nachname"
+                                label="Nachname"
+                                onChange={handleChange('lastName')}
+                                defaultValue={values.lastName}
+                                margin="normal"
+                                fullWidth
+                            />
+                            <br />
+                            <TextField
+                                placeholder="Ihre Email"
+                                label="Email"
+                                onChange={handleChange('email')}
+                                defaultValue={values.email}
+                                margin="normal"
+                                fullWidth
+                            />
+                            <br /><br />
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <KeyboardDatePicker
+                                    margin="normal"
+                                    id="date-picker-dialog"
+                                    label="Ihr Geburtsdatum"
+                                    format="dd/MM/yyyy"
+                                    value={values.birthday}
+                                    onChange={handleChangeDateBirthday()}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change date',
+                                    }}
+                                />
+                            </MuiPickersUtilsProvider>
+                        </fieldset>
+                        <br />
+                        <div className="flexbox-modal">
+                        <Button
+                            variant="contained"
+                            href="."
+                        >Abbrechen
+                    </Button>
+                        <br />
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                onClick={this.continue}
+                            >Weiter
+                    </Button>
 
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        onClick={this.continue}
-                    >Weiter
-                    </Button>
-                    <br />
-                    <Button
-                        variant="contained"                        
-                        href="."
-                    >Abbrechen
-                    </Button>
+                        </div>
+                    </div>
                 </Dialog>
             </>
 

@@ -11,20 +11,23 @@ function List({ match }) {
         accountService.getAll().then(x => setUsers(x));
     }, []);
 
+
     function deleteUser(id) {
-        setUsers(users.map(x => {
-            if (x.id === id) { x.isDeleting = true; }
-            return x;
-        }));
-        accountService.delete(id).then(() => {
-            setUsers(users => users.filter(x => x.id !== id));
-        });
+        if (confirm('Sind Sie sicher?')) {
+            setUsers(users.map(x => {
+                if (x.id === id) { x.isDeleting = true; }
+                return x;
+            }));
+            accountService.delete(id).then(() => {
+                setUsers(users => users.filter(x => x.id !== id));
+            });
+        }
     }
 
     return (
-        <div>
-            <h1>Benutzer</h1>            
-            <Link to={`${path}/add`} className="btn mb-2">Neuen Benutzer anlegen</Link>
+        <div className="container-xl">
+            <h1>Benutzer</h1>
+            <Link to={`${path}/add`} className="btn-p mb-2">Neuen Benutzer anlegen</Link>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -41,9 +44,9 @@ function List({ match }) {
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td style={{ whiteSpace: 'nowrap' }}>
-                                <Link to={`${path}/edit/${user.id}`} className="btn mr-1">Editieren</Link>
-                                <button onClick={() => deleteUser(user.id)} className="btn" style={{ width: '100px' }} disabled={user.isDeleting}>
-                                    {user.isDeleting 
+                                <Link to={`${path}/edit/${user.id}`} className="btn-e mr-2">Editieren</Link>
+                                <button onClick={() => deleteUser(user.id)} className="btn-c" disabled={user.isDeleting}>
+                                    {user.isDeleting
                                         ? <span className="spinner-border spinner-border-sm"></span>
                                         : <span>Löschen</span>
                                     }

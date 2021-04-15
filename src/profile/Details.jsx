@@ -8,13 +8,13 @@ function Details({ match }) {
     const user = accountService.userValue;
 
     return (
-        <div>
+        <div className="container-xl">
             <h1>Ihr Profil</h1>
             <p>
                 <strong>Name: </strong> {user.title} {user.firstName} {user.lastName}<br />
                 <strong>Email: </strong> {user.email}
             </p>
-            <p><Link to={`${path}/update`}>Update Profil</Link></p>
+            <p><Link to={`${path}/update`} className="btn-p">Update Profil</Link></p>
         </div>
     );
 }

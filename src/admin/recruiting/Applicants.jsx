@@ -5,6 +5,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 const Applicants = (props) => {
     const applieduser = props.location.applieduser;
     return (
+        <div className="container-xl">
         <Container>
             <Row>
                 {applieduser.map((au, index) => (
@@ -19,6 +20,7 @@ const Applicants = (props) => {
                 ))}
             </Row>
         </Container>
+        </div>
     )
 }
 

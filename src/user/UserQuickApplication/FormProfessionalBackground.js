@@ -37,146 +37,148 @@ export class FormProfessionalBackground extends Component {
                     fullWidth
                     maxWidth='sm'
                 >
-                    <fieldset>
-                        <legend>Beruflicher Werdegang:</legend>
-                        <Grid container spacing={3}>
+                    <div className="container-modal">
+                        <fieldset>
+                            <legend>Beruflicher Werdegang:</legend>
+                            <Grid container spacing={3}>
 
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <Grid item xs={6}>
-                                    <KeyboardDatePicker
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <Grid item xs={6}>
+                                        <KeyboardDatePicker
+                                            margin="normal"
+                                            id="backgroundDateFromOne"
+                                            label="Von:"
+                                            format="dd/MM/yyyy"
+                                            value={values.backgroundDateFromOne}
+                                            onChange={handleChangeDateBackgroundDateFromOne()}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change date',
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <KeyboardDatePicker
+                                            margin="normal"
+                                            id="backgroundDateToOne"
+                                            label="Bis:"
+                                            format="dd/MM/yyyy"
+                                            value={values.backgroundDateToOne}
+                                            onChange={handleChangeDatebackgroundDateToOne()}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change date',
+                                            }}
+                                        />
+                                    </Grid>
+                                </MuiPickersUtilsProvider>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        placeholder="Arbeitgeber"
+                                        label="Angestellt bei:"
+                                        onChange={handleChange('backgroundFormOne')}
+                                        defaultValue={values.backgroundFormOne}
                                         margin="normal"
-                                        id="backgroundDateFromOne"
-                                        label="Von:"
-                                        format="dd/MM/yyyy"
-                                        value={values.backgroundDateFromOne}
-                                        onChange={handleChangeDateBackgroundDateFromOne()}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
+                                        fullWidth
                                     />
                                 </Grid>
-                                <Grid item xs={6}>
-                                    <KeyboardDatePicker
+
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <Grid item xs={6}>
+                                        <KeyboardDatePicker
+                                            margin="normal"
+                                            id="backgroundDateFromTwo"
+                                            label="Von:"
+                                            format="dd/MM/yyyy"
+                                            value={values.backgroundDateFromTwo}
+                                            onChange={handleChangeDateBackgroundDateFromTwo()}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change date',
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <KeyboardDatePicker
+                                            margin="normal"
+                                            id="backgroundDateToTwo"
+                                            label="Bis:"
+                                            format="dd/MM/yyyy"
+                                            value={values.backgroundDateToTwo}
+                                            onChange={handleChangeDatebackgroundDateToTwo()}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change date',
+                                            }}
+                                        />
+                                    </Grid>
+                                </MuiPickersUtilsProvider>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        placeholder="Arbeitgeber"
+                                        label="Angestellt bei:"
+                                        onChange={handleChange('backgroundFormTwo')}
+                                        defaultValue={values.backgroundFormTwo}
                                         margin="normal"
-                                        id="backgroundDateToOne"
-                                        label="Bis:"
-                                        format="dd/MM/yyyy"
-                                        value={values.backgroundDateToOne}
-                                        onChange={handleChangeDatebackgroundDateToOne()}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
+                                        fullWidth
                                     />
                                 </Grid>
-                            </MuiPickersUtilsProvider>
 
-                            <Grid item xs={12}>
-                                <TextField
-                                    placeholder="Arbeitgeber"
-                                    label="Angestellt bei:"
-                                    onChange={handleChange('backgroundFormOne')}
-                                    defaultValue={values.backgroundFormOne}
-                                    margin="normal"
-                                    fullWidth
-                                />
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <Grid item xs={6}>
+                                        <KeyboardDatePicker
+                                            margin="normal"
+                                            id="backgroundDateFromThree"
+                                            label="Von:"
+                                            format="dd/MM/yyyy"
+                                            value={values.backgroundDateFromThree}
+                                            onChange={handleChangeDateBackgroundDateFromThree()}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change date',
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <KeyboardDatePicker
+                                            margin="normal"
+                                            id="backgroundDateToThree"
+                                            label="Bis:"
+                                            format="dd/MM/yyyy"
+                                            value={values.backgroundDateToThree}
+                                            onChange={handleChangeDatebackgroundDateToThree()}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change date',
+                                            }}
+                                        />
+                                    </Grid>
+                                </MuiPickersUtilsProvider>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        placeholder="Arbeitgeber"
+                                        label="Angestellt bei:"
+                                        onChange={handleChange('backgroundFormThree')}
+                                        defaultValue={values.backgroundFormThree}
+                                        margin="normal"
+                                        fullWidth
+                                    />
+                                </Grid>
                             </Grid>
 
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <Grid item xs={6}>
-                                    <KeyboardDatePicker
-                                        margin="normal"
-                                        id="backgroundDateFromTwo"
-                                        label="Von:"
-                                        format="dd/MM/yyyy"
-                                        value={values.backgroundDateFromTwo}
-                                        onChange={handleChangeDateBackgroundDateFromTwo()}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <KeyboardDatePicker
-                                        margin="normal"
-                                        id="backgroundDateToTwo"
-                                        label="Bis:"
-                                        format="dd/MM/yyyy"
-                                        value={values.backgroundDateToTwo}
-                                        onChange={handleChangeDatebackgroundDateToTwo()}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
-                                    />
-                                </Grid>
-                            </MuiPickersUtilsProvider>
-
-                            <Grid item xs={12}>
-                                <TextField
-                                    placeholder="Arbeitgeber"
-                                    label="Angestellt bei:"
-                                    onChange={handleChange('backgroundFormTwo')}
-                                    defaultValue={values.backgroundFormTwo}
-                                    margin="normal"
-                                    fullWidth
-                                />
-                            </Grid>
-
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <Grid item xs={6}>
-                                    <KeyboardDatePicker
-                                        margin="normal"
-                                        id="backgroundDateFromThree"
-                                        label="Von:"
-                                        format="dd/MM/yyyy"
-                                        value={values.backgroundDateFromThree}
-                                        onChange={handleChangeDateBackgroundDateFromThree()}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <KeyboardDatePicker
-                                        margin="normal"
-                                        id="backgroundDateToThree"
-                                        label="Bis:"
-                                        format="dd/MM/yyyy"
-                                        value={values.backgroundDateToThree}
-                                        onChange={handleChangeDatebackgroundDateToThree()}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
-                                    />
-                                </Grid>
-                            </MuiPickersUtilsProvider>
-
-                            <Grid item xs={12}>
-                                <TextField
-                                    placeholder="Arbeitgeber"
-                                    label="Angestellt bei:"
-                                    onChange={handleChange('backgroundFormThree')}
-                                    defaultValue={values.backgroundFormThree}
-                                    margin="normal"
-                                    fullWidth
-                                />
-                            </Grid>
-                        </Grid>
-
-                        <br />
-                    </fieldset>
-                    <br />
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        onClick={this.continue}
-                    >Weiter
-                            </Button>
-                    <br />
-                    <Button
-                        variant="contained"
-                        onClick={this.back}
-                    >Zurück
+                            <br />
+                        </fieldset>
+                        <div className="flexbox-modal">
+                            <Button
+                                variant="contained"
+                                onClick={this.back}
+                            >Zurück
                     </Button>
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                onClick={this.continue}
+                            >Weiter
+                    </Button>
+                        </div>
+                    </div>
                 </Dialog>
             </>
         )

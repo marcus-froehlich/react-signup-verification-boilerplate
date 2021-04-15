@@ -4,29 +4,39 @@ import Moment from "moment";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { accountService, uploadService, alertService } from "@/_services";
+import { accountService, uploadService, alertService, documentService } from "@/_services";
 
 function List() {
   const user = accountService.userValue;
   const [files, setFiles] = useState(null);
-  
+
   useEffect(() => {
     uploadService.getById(user.id).then((x) => setFiles(x));
   }, []);
-  
-  function handleDownload(id, event){
+
+  function handleDownload(id, event) {
 
     const link = document.createElement('a');
-   
-    var res = uploadService.download(id).then(function(response) {
-      response.blob().then(function(resBlob) {
+
+    var res = uploadService.download(id).then(function (response) {
+      response.blob().then(function (resBlob) {
         var objectURL = URL.createObjectURL(resBlob);
         link.href = objectURL;
         link.click();
       });
     });
     event.preventDefault();
-}
+  }
+
+  const [isDeleting, setIsDeleting] = useState(false);
+  function handleDelete(id, event) {
+    if (confirm('Sind Sie sicher?')) {
+      setIsDeleting(true);
+      documentService.delete(id)
+        .then(() => alertService.success('Dokumenten löschung erfolgreich'))
+        .then(() => location.reload());
+    }
+  }
 
   return (
     <>
@@ -47,7 +57,7 @@ function List() {
                   <td>{file.id}</td>
                   <td><a onClick={() => handleDownload(file.id)}>{file.name}</a></td>
                   <td>{Moment(file.uploadDate).format("DD.MM.YYYY")}</td>
-                  <td> <FontAwesomeIcon icon={faTrash} /></td>
+                  <td><a onClick={() => handleDelete(file.id)}><FontAwesomeIcon icon={faTrash} /></a></td>
                 </tr>
               </tbody>
             ))}

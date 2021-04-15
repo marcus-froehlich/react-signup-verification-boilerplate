@@ -104,10 +104,10 @@ function Overview({ match }) {
         </Table>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmission}>
+          <Button className="btn-sub" onClick={handleSubmission}>
             Bewerbung abschicken
             </Button>
-          <Button variant="secondary" onClick={closeModalHandler}>
+          <Button className="btn-n" onClick={closeModalHandler}>
             Abbrechen
             </Button>
         </Modal.Footer>
@@ -117,7 +117,7 @@ function Overview({ match }) {
 
   return (
     <>
-      <div>
+      <div className="container-xl">
         {show ? <ModalContent /> : null}
         {recruitings &&
           recruitings.recruitment
@@ -126,7 +126,7 @@ function Overview({ match }) {
                 <Accordion defaultActiveKey="0">
                   <Card>
                     <Card.Header>
-                      <Accordion.Toggle as={Button} className="btn-e" eventKey="1">
+                      <Accordion.Toggle as={Button} className="btn-p" eventKey="1">
                         Stellenausschreibung mit dem Titel: {recruiting.title}
                       </Accordion.Toggle>
                     </Card.Header>

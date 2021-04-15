@@ -5,7 +5,9 @@ function Edit({ match }) {
 
   return (
     <div className="editor">
-      <_Editor id={match.params.id}/>
+      <div className="container-xl">
+        <_Editor id={match.params.id} />
+      </div>
     </div>
   );
 }

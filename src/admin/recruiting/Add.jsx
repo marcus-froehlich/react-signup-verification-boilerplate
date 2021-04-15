@@ -30,10 +30,10 @@ class EditorConvertToHTML extends Component {
   handleSubmit(event) {
     var htmlText = document.getElementById("draftAreaHidden").value;
     var title = document.getElementById("inputTitle").value;
-    var model = {"recruitingText": htmlText, "title": title }
+    var model = { "recruitingText": htmlText, "title": title }
     recruitingService
       .create(model)
-      .then(() => { alertService.success("Eintragung erfolgreich"); setTimeout(() => {}, 2000); })      
+      .then(() => { alertService.success("Eintragung erfolgreich"); setTimeout(() => { }, 2000); })
       .then(() => location.reload());
 
     event.preventDefault();
@@ -42,25 +42,27 @@ class EditorConvertToHTML extends Component {
   render() {
     const { editorState } = this.state;
     return (
-      <div className="box-recruiting">
-        <form onSubmit={this.handleSubmit} encType="text/plain">
-          <input id="inputTitle" type="text" placeholder="Aussagekräftige Überschrift" className="mb-3 p-2"/>
-        <Editor
-          editorState={editorState}
-          wrapperClassName="editor-wrapper"
-          editorClassName="editor"
-          onEditorStateChange={this.onEditorStateChange}
-        />
-          <div className="mr-0 w-25">
-            <input className="btn" type="submit" value="Speichern" />
-          </div>
-        </form>
-        <textarea
-          className="draftAreaHidden"
-          id="draftAreaHidden"
-          disabled
-          value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
-        />
+      <div className="container-xl">
+        <div className="box-recruiting">
+          <form onSubmit={this.handleSubmit} encType="text/plain">
+            <input id="inputTitle" type="text" placeholder="Aussagekräftige Überschrift" className="mb-3 p-2"/>
+            <Editor
+              editorState={editorState}
+              wrapperClassName="editor-wrapper"
+              editorClassName="editor"
+              onEditorStateChange={this.onEditorStateChange}
+            />
+            <div className="mr-0 w-25">
+              <input className="btn-sub mr-2" type="submit" value="Speichern" />
+            </div>
+          </form>
+          <textarea
+            className="draftAreaHidden"
+            id="draftAreaHidden"
+            disabled
+            value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+          />
+        </div>
       </div>
     );
   }

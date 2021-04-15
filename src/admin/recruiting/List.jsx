@@ -17,10 +17,10 @@ function List({ match }) {
 
   function handleClick(id) {
     recruitingService.getById(id)
-    .then(data => {
-      setSingle(data);
-      setAppliedUser(data.appliedUser);
-    });
+      .then(data => {
+        setSingle(data);
+        setAppliedUser(data.appliedUser);
+      });
   }
 
   function applyingUser(id) {
@@ -28,98 +28,103 @@ function List({ match }) {
   }
 
   function deleteRecruitment(id) {
-    recruitingService.delete(id).then(() =>
-      recruitingService
-        .getAll()
-        .then((x) => setRecruitings(x))
-        .then(() => location.reload())
-    );
+    if (confirm('Sind Sie sicher?')) {
+      recruitingService.delete(id).then(() =>
+        recruitingService
+          .getAll()
+          .then((x) => setRecruitings(x))
+          .then(() => location.reload())
+      );
+    }
   }
   return (
-    <div className="recruitingContainer">
-      <div className="header_recruitment">
-        <h1>Stellenübersicht</h1>
-      </div>
-      <div className="recruitingContent_small">
-        <div>
-          <label>
-            <input type="text" className="input-search"></input>
-          </label>
-          <Link to={`${path}/add`} className="btn">
-            Stellenanzeige anlegen
-          </Link>
+    <div className="container-xl">
+      <div className="recruitingContainer">
+        <div className="header_recruitment">
+          <h1>Stellenübersicht</h1>
         </div>
-        <br />
-        <div className="recruitinContainer_small_scroll" id="style-1">
-          {recruitings && recruitings.recruitment.sort((a, b) => b.id - a.id).map((recruiting) => (
-            <div key={recruiting.id}>
-              <a id={recruiting.id}>
-                <Card border="secondary" style={{ width: "18rem" }}>
-                  <Card.Header>{recruiting.title}</Card.Header>
-                  <Card.Body>
-                    <Card.Title></Card.Title>
-                    <Card.Text>
-                      <span>
-                        Erstellt am:{" "}
-                        {Moment(recruiting.date).format("DD.MM.YYYY")}
-                      </span>
-                      <br />
-                      <button
-                        className="mt-3"
-                        onClick={() => handleClick(recruiting.id)}
-                      >
-                        Details
+        <div className="recruitingContent_small">
+          <div>
+            {/* <label>
+              <input type="text" className="input-search"></input>
+            </label> */}
+            <Link to={`${path}/add`} className="btn-p">
+              Stellenanzeige anlegen
+          </Link>
+          </div>
+          <br />
+          <div className="recruitinContainer_small_scroll" id="style-1">
+            {recruitings && recruitings.recruitment.sort((a, b) => b.id - a.id).map((recruiting) => (
+              <div key={recruiting.id}>
+                <a id={recruiting.id}>
+                  <Card border="secondary" style={{ width: "18rem" }}>
+                    <Card.Header>{recruiting.title}</Card.Header>
+                    <Card.Body>
+                      <Card.Title></Card.Title>
+                      <Card.Text>
+                        <span>
+                          Erstellt am:{" "}
+                          {Moment(recruiting.date).format("DD.MM.YYYY")}
+                        </span>
+                        <br />
+                        <button
+                          className="btn-e mt-3"
+                          onClick={() => handleClick(recruiting.id)}
+                        >
+                          Details
                           </button>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </a>
-              <br />
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </a>
+                <br />
+              </div>
+            ))}
+            {!recruitings && (
+              <table>
+                <tbody>
+                  <tr>
+                    <td colSpan="4" className="text-center">
+                      <span className="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+        <div className="recruitingContent_big">
+          {single && (
+            <div>
+              <div className="btn-edit-recruiting">
+                <Link to={{
+                  pathname: `${path}/applicants`,
+                  applieduser
+                }} className="btn-sub mr-2">{single.appliedUser.length} Bewerber</Link>
+                <Link to={`${path}/edit/${single.id}`} className="btn-e mr-2">
+                  Editieren
+              </Link>
+                <button
+                  onClick={() => deleteRecruitment(single.id)}
+                  className="btn-c"
+                  style={{ width: "100px" }}
+                  disabled={single.isDeleting}
+                >
+                  {single.isDeleting ? (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  ) : (
+                    <span>Löschen</span>
+                  )}
+                </button>
+              </div>
+              <div className="recruitinContainer_big_scroll mb-2" id="style-1">
+                <div className="mr-5"
+                  dangerouslySetInnerHTML={{ __html: single.recruitingText }}
+                />
+              </div>
             </div>
-          ))}
-          {!recruitings && (
-            <table>
-              <tbody>
-                <tr>
-                  <td colSpan="4" className="text-center">
-                    <span className="spinner-border spinner-border-lg align-center"></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           )}
         </div>
-      </div>
-      <div className="recruitingContent_big">
-        {single && (
-          <div>
-            <div className="btn-edit-recruiting">
-              <Link to={{
-                pathname: `${path}/applicants`,
-                applieduser }} className="btn">{single.appliedUser.length} Bewerber</Link>
-              <Link to={`${path}/edit/${single.id}`} className="btn">
-                Editieren
-              </Link>
-              <button
-                onClick={() => deleteRecruitment(single.id)}
-                className="btn ml-2"
-                style={{ width: "100px" }}
-                disabled={single.isDeleting}
-              >
-                {single.isDeleting ? (
-                  <span className="spinner-border spinner-border-sm"></span>
-                ) : (
-                  <span>Löschen</span>
-                )}
-              </button>
-            </div>
-            <div className="recruitinContainer_big_scroll mb-2" id="style-1">
-              <div
-                dangerouslySetInnerHTML={{ __html: single.recruitingText }}
-              />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

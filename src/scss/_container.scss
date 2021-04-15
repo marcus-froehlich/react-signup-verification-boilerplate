@@ -1,0 +1,40 @@
+.container-xl{ 
+    position: relative;
+    min-height: 530px;
+    background: #fff;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.125)
+}
+
+.container-xs{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    min-width: 500px;
+    background: #fff;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.125)
+}
+
+.container-modal{ 
+    background: #fff;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.125)
+}
+
+.flexbox-modal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-max{ 
+    background: #fff;
+    max-width: 90%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.125)
+}

@@ -1,0 +1,89 @@
+.recruitingContainer {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-areas:
+      "header header header"
+      "left right right";
+    grid-template-columns: 350px 4fr 1fr;
+    grid-template-rows: 75px 1fr;
+  }
+  
+  .recruitingContainer > div {
+    border: 0px dashed #888;
+  }
+   
+  .header_recruitment {
+    grid-area: header;
+    text-align: center;
+  }
+  
+  .recruitingContent_small {
+    grid-area: left;
+    padding: 20px;
+  }
+  
+  .recruitingContent_big {
+    grid-area: right;
+    padding: 20px;
+  }
+  
+  .btn-edit-recruiting {
+    margin-bottom: 10px;
+  }
+  
+  .recruitinContainer_small_scroll {
+    height: 590px;
+    overflow-y: scroll;
+  }
+  
+  .recruitinContainer_big_scroll {
+    height: 600px;
+    overflow-y: scroll;
+  }
+
+  #style-1::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+  
+  #style-1::-webkit-scrollbar {
+    width: 12px;
+    background-color: #f5f5f5;
+  }
+  
+  #style-1::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
+  }
+  
+  .MuiDialog-paper {
+    padding: 15px;
+  }
+  
+  button.MuiButton-containedSecondary {
+    margin-bottom: 10px;
+  }
+
+  .draftAreaHidden {
+    display: none;
+  }
+  
+  .rdw-editor-toolbar {
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  }
+  
+  .rdw-editor-main {
+    background-color: white;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+    overflow: auto;
+  }
+  
+  .public-DraftEditor-content{
+    margin-left: 10px;
+  }

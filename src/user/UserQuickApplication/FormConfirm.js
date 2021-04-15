@@ -22,7 +22,11 @@ export class FormConfirm extends Component {
     handleClick = e => {
         const user = accountService.userValue;
         const dataSet = this.props.values;
-        documentService.create(dataSet, user.id).then(() => { alertService.success("Eintragung erfolgreich")})
+        if (confirm('Sind Sie sicher, dass Ihre Daten alle richtig sind?')) {
+        documentService.create(dataSet, user.id)
+        .then(() => { alertService.success("Eintragung erfolgreich") })
+        .then(() => location.href ='.');
+        }
     }
 
     // printDocument(e) {
@@ -50,8 +54,6 @@ export class FormConfirm extends Component {
             values
         } = this.props;
 
-        
-
         function setLanguage(value) {
             switch (value) {
                 case 10:
@@ -66,154 +68,156 @@ export class FormConfirm extends Component {
         }
 
         return (
-            <div className="grid-container" id="grid-container">
-                <div className="personal">
-                    <div><h4>{values.firstName} {values.lastName}</h4></div>
-                    <hr />
-                    <div>
-                        Anschrift:
-                    </div>
-                    <div>
-                        Geboren:
-                    </div>
-                    <div>
-                        Tel.:
-                    </div>
-                    <div>
-                        Mobil:
-                    </div>
-                    <div>
-                        Email:
-                    </div>
-                </div>
-                <div className="personal-data">
-                    <div><h4>Persönlich Daten</h4></div><hr />
-                    <div>{values.street} {values.addressnumber}, {values.postcode} {values.city}</div>
-                    <div>{Moment(values.birthday).format("DD.MM.YYYY")}</div>
-                    <div>{values.phone}</div>
-                    <div>{values.mobile}</div>
-                    <div>{values.email}</div>
-                </div>
-
-                <div className="bw">
-                    <div>
-                        <h4>Beruflicher Werdegang</h4>
+            <div className="container-max mt-3">
+                <div className="grid-container" id="grid-container">
+                    <div className="personal">
+                        <div><h4>{values.firstName} {values.lastName}</h4></div>
                         <hr />
-                    </div>
-                    <div className="bw1-f">
-                        {Moment(values.backgroundDateFromOne).format("DD.MM.YYYY")}
-                    </div>
-                    <div className="bw1-t">
-                        {Moment(values.backgroundDateToOne).format("DD.MM.YYYY")}
-                    </div>
-                    <div className="bw2-f">
-                        {Moment(values.backgroundDateFromTwo).format("DD.MM.YYYY")}
-                    </div>
-                    <div className="bw2-t">
-                        {Moment(values.backgroundDateToTwo).format("DD.MM.YYYY")}
-                    </div>
-                    <div className="bw3-f">
-                        {Moment(values.backgroundDateFromThree).format("DD.MM.YYYY")}
-                    </div>
-                    <div className="bw3-t">
-                        {Moment(values.backgroundDateToThree).format("DD.MM.YYYY")}
-                    </div>
-                </div>
-
-                <div className="bw-data">
-                    <div>
-                        {values.backgroundFormOne}
-                    </div>
-                    <div>
-                        {values.backgroundFormTwo}
-                    </div>
-                    <div>
-                        {values.backgroundFormThree}
-                    </div>
-                </div>
-
-                <div className="sh">
-                    <div>
-                        <h4>Schulbildung</h4>
-                        <hr />
-                    </div>
-                    <div className="sh-f">
-                        {Moment(values.educationDateFrom).format("DD.MM.YYYY")}
-                    </div>
-                    <div className="sh-t">
-                        {Moment(values.educationDateTo).format("DD.MM.YYYY")}
-                    </div>
-                </div>
-                <div className="sh-data">
-                    <div className="sh-sn">
                         <div>
-                            {values.shool}
-                        </div>
-
+                            Anschrift:
                     </div>
-                    <div className="sh-yn">
                         <div>
-                            Mit Abschluss: {values.education}
-                        </div>
+                            Geboren:
                     </div>
-                </div>
-
-                <div className="bkq">
-                    <div>
                         <div>
-                            <h4>Besondere Kenntnisse und Qualifikationen</h4>
+                            Tel.:
+                    </div>
+                        <div>
+                            Mobil:
+                    </div>
+                        <div>
+                            Email:
+                    </div>
+                    </div>
+                    <div className="personal-data">
+                        <div><h4>Persönlich Daten</h4></div><hr />
+                        <div>{values.street} {values.addressnumber}, {values.postcode} {values.city}</div>
+                        <div>{Moment(values.birthday).format("DD.MM.YYYY")}</div>
+                        <div>{values.phone}</div>
+                        <div>{values.mobile}</div>
+                        <div>{values.email}</div>
+                    </div>
+
+                    <div className="bw">
+                        <div>
+                            <h4>Beruflicher Werdegang</h4>
                             <hr />
                         </div>
-                        {values.specialKnowledgeOne}
+                        <div className="bw1-f">
+                            {Moment(values.backgroundDateFromOne).format("DD.MM.YYYY")}
+                        </div>
+                        <div className="bw1-t">
+                            {Moment(values.backgroundDateToOne).format("DD.MM.YYYY")}
+                        </div>
+                        <div className="bw2-f">
+                            {Moment(values.backgroundDateFromTwo).format("DD.MM.YYYY")}
+                        </div>
+                        <div className="bw2-t">
+                            {Moment(values.backgroundDateToTwo).format("DD.MM.YYYY")}
+                        </div>
+                        <div className="bw3-f">
+                            {Moment(values.backgroundDateFromThree).format("DD.MM.YYYY")}
+                        </div>
+                        <div className="bw3-t">
+                            {Moment(values.backgroundDateToThree).format("DD.MM.YYYY")}
+                        </div>
                     </div>
-                    <div>
-                        {values.specialKnowledgeTwo}
+
+                    <div className="bw-data">
+                        <div>
+                            {values.backgroundFormOne}
+                        </div>
+                        <div>
+                            {values.backgroundFormTwo}
+                        </div>
+                        <div>
+                            {values.backgroundFormThree}
+                        </div>
                     </div>
-                    <div>
-                        {values.specialKnowledgeThree}
+
+                    <div className="sh">
+                        <div>
+                            <h4>Schulbildung</h4>
+                            <hr />
+                        </div>
+                        <div className="sh-f">
+                            {Moment(values.educationDateFrom).format("DD.MM.YYYY")}
+                        </div>
+                        <div className="sh-t">
+                            {Moment(values.educationDateTo).format("DD.MM.YYYY")}
+                        </div>
                     </div>
-                    <div>
-                        {values.specialKnowledgeFour}
+                    <div className="sh-data">
+                        <div className="sh-sn">
+                            <div>
+                                {values.shool}
+                            </div>
+
+                        </div>
+                        <div className="sh-yn">
+                            <div>
+                                Mit Abschluss: {values.education}
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        {values.specialKnowledgeFive}
+
+                    <div className="bkq">
+                        <div>
+                            <div>
+                                <h4>Besondere Kenntnisse und Qualifikationen</h4>
+                                <hr />
+                            </div>
+                            {values.specialKnowledgeOne}
+                        </div>
+                        <div>
+                            {values.specialKnowledgeTwo}
+                        </div>
+                        <div>
+                            {values.specialKnowledgeThree}
+                        </div>
+                        <div>
+                            {values.specialKnowledgeFour}
+                        </div>
+                        <div>
+                            {values.specialKnowledgeFive}
+                        </div>
+                        <div>
+                            <hr />
+                            <h4>Sprachen</h4>
+                            <hr />
+                        </div>
                     </div>
-                    <div>
-                        <hr />
-                        <h4>Sprachen</h4>
-                        <hr />
+                    <div className="lang">
+                        <div>
+                            Deutsch:
                     </div>
-                </div>
-                <div className="lang">
-                    <div>
-                        Deutsch:
+                        <div>
+                            Englisch:
                     </div>
-                    <div>
-                        Englisch:
                     </div>
-                </div>
-                <div className="lang-data">
-                    <div>
-                        {setLanguage(values.languageGerman)}
+                    <div className="lang-data">
+                        <div>
+                            {setLanguage(values.languageGerman)}
+                        </div>
+                        <div>
+                            {setLanguage(values.languageEnglish)}
+                        </div>
                     </div>
-                    <div>
-                        {setLanguage(values.languageEnglish)}
-                    </div>
-                </div>
-                <div className="btn-dg">
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        onClick={this.handleClick}
-                    >Dokument Speichern
+                    <div className="btn-dg">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={this.handleClick}
+                        >Dokument Speichern
                             </Button>
-                </div>
-                <div className="btn-back">
-                    <Button
-                        variant="contained"
-                        onClick={this.back}
-                    >Zurück
+                    </div>
+                    <div className="btn-back">
+                        <Button
+                            variant="contained"
+                            onClick={this.back}
+                        >Zurück
                     </Button>
+                    </div>
                 </div>
             </div>
         )

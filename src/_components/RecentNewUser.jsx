@@ -12,37 +12,37 @@ function RecentNewUser() {
                     <tbody>
                         <tr>
                             <td>
-                                <div className="imgBx"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                                <div className="imgBx"><i className="fa fa-user-circle-o" aria-hidden="true"></i></div>
                             </td>
                             <td><h4>Marcus</h4><span>German</span></td>
                         </tr>
                         <tr>
                             <td>
-                                <div className="imgBx"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                                <div className="imgBx"><i className="fa fa-user-circle-o" aria-hidden="true"></i></div>
                             </td>
                             <td><h4>UserName</h4><span>German</span></td>
                         </tr>
                         <tr>
                             <td>
-                                <div className="imgBx"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                                <div className="imgBx"><i className="fa fa-user-circle-o" aria-hidden="true"></i></div>
                             </td>
                             <td><h4>UserName</h4><span>German</span></td>
                         </tr>
                         <tr>
                             <td>
-                                <div className="imgBx"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                                <div className="imgBx"><i className="fa fa-user-circle-o" aria-hidden="true"></i></div>
                             </td>
                             <td><h4>UserName</h4><span>German</span></td>
                         </tr>
                         <tr>
                             <td>
-                                <div className="imgBx"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                                <div className="imgBx"><i className="fa fa-user-circle-o" aria-hidden="true"></i></div>
                             </td>
                             <td><h4>UserName</h4><span>German</span></td>
                         </tr>
                         <tr>
                             <td>
-                                <div className="imgBx"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                                <div className="imgBx"><i className="fa fa-user-circle-o" aria-hidden="true"></i></div>
                             </td>
                             <td><h4>UserName</h4><span>German</span></td>
                         </tr>
