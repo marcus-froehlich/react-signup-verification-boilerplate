@@ -4,8 +4,9 @@ import { EditorState, convertToRaw, ContentState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
+import Department from "./Department";
 
-import { recruitingService, alertService } from "@/_services";
+import { departmentService, recruitingService, alertService } from "@/_services";
 
 class EditorConvertToHTML extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class EditorConvertToHTML extends Component {
       const editorState = EditorState.createWithContent(contentState);
       this.state = {
         editorState,
-      };
+        };
     }
   }
 
@@ -30,13 +31,13 @@ class EditorConvertToHTML extends Component {
   handleSubmit(event) {
     var htmlText = document.getElementById("draftAreaHidden").value;
     var title = document.getElementById("inputTitle").value;
-    var model = { "recruitingText": htmlText, "title": title }
+    var department = document.getElementById("department-select").value;
+    var model = { "recruitingText": htmlText, "title": title, "departmentId": department }
     recruitingService
       .create(model)
       .then(() => { alertService.success("Eintragung erfolgreich"); setTimeout(() => { }, 2000); })
       .then(() => location.reload());
-
-    event.preventDefault();
+      event.preventDefault();
   }
 
   render() {
@@ -45,7 +46,8 @@ class EditorConvertToHTML extends Component {
       <div className="container-xl">
         <div className="box-recruiting">
           <form onSubmit={this.handleSubmit} encType="text/plain">
-            <input id="inputTitle" type="text" placeholder="Aussagekräftige Überschrift" className="mb-3 p-2"/>
+            <input id="inputTitle" type="text" placeholder="Aussagekräftige Überschrift" className="mb-3 p-2" />
+            <Department/>
             <Editor
               editorState={editorState}
               wrapperClassName="editor-wrapper"

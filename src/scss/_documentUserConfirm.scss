@@ -1,85 +1,155 @@
-// Document CSS-GRID
-
-html, body, .grid-container { height: 100%; margin: 0; }
-
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 20px 20px;
+  grid-template-columns: 1fr 1.5fr 0.5fr;
+  grid-template-rows: 3fr 2.5fr 2.5fr 1.0fr 1.0fr 1.0fr 1.0fr 1.0fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 2.5fr 1.5fr 2.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 2.5fr 1.5fr 1.5fr 3fr;
+  gap: 5px 5px;
   grid-template-areas:
-    "personal personal-data"
-    "bw bw-data"
-    "sh sh-data"
-    "bkq bkq"
-    "lang lang-data"
-    "btn-dg btn-back";
+    ". . ."
+    ". personalDataTitle ."
+    "persName . ."
+    "persAdr persDataAdr ."
+    "persBirth persDataBirth ."
+    "persTel persDataTel ."
+    "persMobile persDataMobile ."
+    "persEmail persDataEmail ."
+    ". . ."
+    "backgroundTitle backgroundTitle backgroundTitle"
+    "backgroundDateOne backgroundFormOneName ."
+    "backgroundFormTwo backgroundFormTwoName ."
+    "backgroundFormThree backgroundFormThreeName ."
+    ". . ."
+    "educationTitle educationTitle educationTitle"
+    "educationFromTo shoolMain shoolMain"
+    "specialKnowledge specialKnowledge specialKnowledge"
+    "specialKnowledgeOne specialKnowledgeOne specialKnowledgeOne"
+    "specialKnowledgeTwo specialKnowledgeTwo specialKnowledgeTwo"
+    "specialKnowledgeThree specialKnowledgeThree specialKnowledgeThree"
+    "specialKnowledgeFour specialKnowledgeFour specialKnowledgeFour"
+    "specialKnowledgeFive specialKnowledgeFive specialKnowledgeFive"
+    "language language language"
+    "german languageGerman ."
+    "english languageEnglish ."
+    ". . .";
 }
 
-.personal { grid-area: personal; }
+.persName { grid-area: persName; }
 
-.personal-data { grid-area: personal-data; }
+.persAdr { grid-area: persAdr; }
 
-.bw {
+.persBirth { grid-area: persBirth; }
+
+.persTel { grid-area: persTel; }
+
+.persMobile { grid-area: persMobile; }
+
+.persEmail { grid-area: persEmail; }
+
+.personalDataTitle { grid-area: personalDataTitle; }
+
+.persDataAdr { grid-area: persDataAdr; }
+
+.persDataBirth { grid-area: persDataBirth; }
+
+.persDataTel { grid-area: persDataTel; }
+
+.persDataMobile { grid-area: persDataMobile; }
+
+.persDataEmail { grid-area: persDataEmail; }
+
+.backgroundTitle { grid-area: backgroundTitle; }
+
+.backgroundDateOne {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 20px 20px;
+  grid-template-rows: 0.7fr;
+  gap: 0px 0px;
   grid-template-areas:
-    "bw1-f bw1-t"
-    "bw2-f bw2-t"
-    "bw3-f bw3-t";
-  grid-area: bw;
+    "backgroundDateFromOne backgroundDateToOne";
+  grid-area: backgroundDateOne;
 }
 
-.bw1-f { grid-area: bw1-f; }
+.backgroundDateFromOne { grid-area: backgroundDateFromOne; }
 
-.bw1-t { grid-area: bw1-t; }
+.backgroundDateToOne { grid-area: backgroundDateToOne; }
 
-.bw2-f { grid-area: bw2-f; }
-
-.bw2-t { grid-area: bw2-t; }
-
-.bw3-f { grid-area: bw3-f; }
-
-.bw3-t { grid-area: bw3-t; }
-
-.bw-data { grid-area: bw-data; }
-
-.sh {
+.backgroundFormTwo {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "sh-f sh-t";
-  grid-area: sh;
+    "backgroundDateFromTwo backgroundDateFromTwobackgroundDateToTwo";
+  grid-area: backgroundFormTwo;
 }
 
-.sh-f { grid-area: sh-f; }
+.backgroundDateFromTwobackgroundDateToTwo { grid-area: backgroundDateFromTwobackgroundDateToTwo; }
 
-.sh-t { grid-area: sh-t; }
+.backgroundDateFromTwo { grid-area: backgroundDateFromTwo; }
 
-.sh-data {
+.backgroundFormThree {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "sh-sn sh-yn";
-  grid-area: sh-data;
+    "backgroundDateFromThree backgroundDateToThree";
+  grid-area: backgroundFormThree;
 }
 
-.sh-sn { grid-area: sh-sn; }
+.backgroundDateFromThree { grid-area: backgroundDateFromThree; }
 
-.sh-yn { grid-area: sh-yn; }
+.backgroundDateToThree { grid-area: backgroundDateToThree; }
 
-.bkq { grid-area: bkq; }
+.backgroundFormOneName { grid-area: backgroundFormOneName; }
 
-.lang { grid-area: lang; }
+.backgroundFormTwoName { grid-area: backgroundFormTwoName; }
 
-.lang-data { grid-area: lang-data; }
+.backgroundFormThreeName { grid-area: backgroundFormThreeName; }
 
-.btn-dg { grid-area: btn-dg; }
+.educationTitle { grid-area: educationTitle; }
 
-.btn-back { grid-area: btn-back; }
+.educationFromTo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "educationDateFrom educationDateTo";
+  grid-area: educationFromTo;
+}
+
+.educationDateFrom { grid-area: educationDateFrom; }
+
+.educationDateTo { grid-area: educationDateTo; }
+
+.shoolMain {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . .";
+  grid-area: shoolMain;
+}
+
+.specialKnowledge { grid-area: specialKnowledge; }
+
+.specialKnowledgeOne { grid-area: specialKnowledgeOne; }
+
+.specialKnowledgeTwo { grid-area: specialKnowledgeTwo; }
+
+.specialKnowledgeThree { grid-area: specialKnowledgeThree; }
+
+.specialKnowledgeFour { grid-area: specialKnowledgeFour; }
+
+.specialKnowledgeFive { grid-area: specialKnowledgeFive; }
+
+.language { grid-area: language; }
+
+.german { grid-area: german; }
+
+.english { grid-area: english; }
+
+.languageEnglish { grid-area: languageEnglish; }
+
+.languageGerman { grid-area: languageGerman; }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 
 import { Role } from '@/_helpers';
-import { accountService } from '@/_services';
+import { accountService, globalService } from '@/_services';
 import { PrivateRoute } from '@/_components';
 import { Home } from '@/home';
 import { Profile } from '@/profile';

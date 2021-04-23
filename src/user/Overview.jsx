@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Accordion, Card, Button, Modal, Table } from "react-bootstrap";
 import { Role } from "@/_helpers";
-import { accountService, uploadService, recruitingService } from "@/_services";
+import { accountService, uploadService, recruitingService, alertService } from "@/_services";
 
 function Overview({ match }) {
   const user = accountService.userValue;
@@ -13,6 +13,7 @@ function Overview({ match }) {
 
   const [recruitings, setRecruitings] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isUserApplied, setIsUserApplied] = useState([]);
 
   const [files, setFiles] = useState([]);
   const [documentList, setDocumentList] = useState([]);
@@ -29,6 +30,10 @@ function Overview({ match }) {
     uploadService.getById(user.id).then((x) => setFiles(x));
   }, []);
 
+  useEffect(() => {
+    recruitingService.isUserApplied(user.id).then((x) => setIsUserApplied(x));
+  }, []);
+
   const handleSubmission = (event) => {
     event.preventDefault();
     const checkboxes = document.querySelectorAll('input[name="document-input"]:checked');  
@@ -37,7 +42,11 @@ function Overview({ match }) {
       docs.push(checkbox.value);
     });
 
-    recruitingService.userApplying(modalInfo.id, user.id, docs);
+    console.log('ModalId', modalInfo.id, 'UserId', user.id, 'Alle Dokumente', docs);
+    recruitingService.userApplying(modalInfo.id, user.id, docs)
+    .then(() => { alertService.success("Bewerbung erfolgreich"); setTimeout(() => { }, 2000); })
+    .then(() => location.reload());
+    event.preventDefault();;
 
   }
 
@@ -65,7 +74,7 @@ function Overview({ match }) {
           <Modal.Title>{modalInfo.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Wenn Sie sich für diese Stelle bewerben möchten, welche Dateien möchten Sie bereitstellen?</p>
+          <p>Wenn Sie sich für diese Stelle bewerben möchten, geben Sie an, welche Dateien Sie bereitstellen möchten?</p>
           <Table striped bordered hover>
           <thead>
             <tr>
@@ -132,13 +141,12 @@ function Overview({ match }) {
                     </Card.Header>
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
-                      <Button className="btn-e"
-                          onClick={() => infoEvents(recruiting)}
-                          // onClick={() => applyingUser(recruiting.id, user.id)}
-                          
-                        >
+                        {!isUserApplied.some(x => x === recruiting.id) ? 
+                      <Button className="btn-e" onClick={() => infoEvents(recruiting)}>
                           Auf diese Stelle Bewerben
-                          </Button>
+                          </Button> : 
+                          <Button className="btn-secondary">Sie haben sich auf diese Stelle beworben</Button>
+                        }
                         <div   
                         className="m-2"                       
                           dangerouslySetInnerHTML={{

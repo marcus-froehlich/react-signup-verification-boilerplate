@@ -1,7 +1,14 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Card, Button } from 'react-bootstrap'
+import { recruitingService } from "@/_services";
+
 
 const CardApplicant = ( props ) => {  
+    
+    useEffect(() => {
+        recruitingService.getAll().then((x) => { setRecruitings(x) });
+      }, []);
+
     return (
         <div>
             <Card style={{ width: '18rem' }}>

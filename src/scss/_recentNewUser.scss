@@ -1,11 +1,9 @@
 .details {
     position: relative;
     width: 100%;
+    display: flex;
+    justify-content: flex-end;
     padding: 20px;
-    padding-top: 0;
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: 4fr 1fr;
 }
 
 .cardHeader {
@@ -14,8 +12,8 @@
     align-items: flex-start;
 }
 
-.cardHeader h2 {
-    font-weight: 600;
+.cardHeader h4 {
+    font-weight: 500;
 }
 
 .details .recentNewUser{
@@ -23,6 +21,8 @@
     min-height: 530px;
     background: #fff;
     padding: 20px;
+    max-width: 320px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .details .recentNewUser .imgBx{

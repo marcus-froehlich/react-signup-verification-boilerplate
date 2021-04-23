@@ -8,13 +8,13 @@ const Applicants = (props) => {
         <div className="container-xl">
         <Container>
             <Row>
-                {applieduser.map((au, index) => (
+                {applieduser.map((ul, index) => (
                     <Col key={index} sm={6}>
                         <CardApplicant 
-                            firstName={au.firstName}
-                            lastName={au.lastName}
-                            email={au.email}
-                            userId={au.userId}
+                            firstName={ul.firstName}
+                            lastName={ul.lastName}
+                            email={ul.email}
+                            userId={ul.userId}
                         ></CardApplicant>
                     </Col>
                 ))}

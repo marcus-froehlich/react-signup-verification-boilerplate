@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, Route } from "react-router-dom";
 
 import { Role } from "@/_helpers";
-import { accountService } from "@/_services";
+import { accountService, globalService } from "@/_services";
+import { DepartmentContext } from '../_context/DepartmentContext';
 
 function Nav() {
   const [user, setUser] = useState({});
+  const [department, setDepartment] = useContext(DepartmentContext);
 
   useEffect(() => {
     const subscription = accountService.user.subscribe((x) => setUser(x));
@@ -35,7 +37,7 @@ function Nav() {
         {user.role === Role.User && (
           <li>
             <a href="/user">
-              <span className="icon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
+              <span className="icon"><i className="fa fa-address-card-o" aria-hidden="true"></i></span>
               <span className="title">Stellenausschreibungen</span>
             </a>
           </li>
@@ -43,7 +45,7 @@ function Nav() {
         {user.role === Role.User && (
           <li>
             <a href="/user/document">
-              <span className="icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+              <span className="icon"><i className="fa fa-file-text-o" aria-hidden="true"></i></span>
               <span className="title">Dokumentenverwaltung</span>
             </a>
           </li>
@@ -51,16 +53,24 @@ function Nav() {
         {user.role === Role.User && (
           <li>
             <a href="/user/user_quick_application">
-              <span className="icon"><i class="fa fa-bolt" aria-hidden="true"></i></span>
+              <span className="icon"><i className="fa fa-bolt" aria-hidden="true"></i></span>
               <span className="title">Schnell Bewerbung</span>
             </a>
           </li>
         )}
         {user.role === Role.Admin && (
           <li>
-            <a href="/admin">
-              <span className="icon"><i class="fa fa-wrench" aria-hidden="true"></i></span>
-              <span className="title">Admin</span>
+            <a href="/admin/users">
+              <span className="icon"><i className="fa fa-wrench" aria-hidden="true"></i></span>
+              <span className="title">User verwalten</span>
+            </a>
+          </li>
+        )}
+        {user.role === Role.Admin && department && (
+          <li>
+            <a href="/admin/recruiting">
+              <span className="icon"><i className="fa fa-address-card-o" aria-hidden="true"></i></span>
+              <span className="title">Stellenausschreibung</span>
             </a>
           </li>
         )}
@@ -73,21 +83,12 @@ function Nav() {
         <li>
           <a onClick={accountService.logout} href="#">
             <span className="icon"><i className="fa fa-lock" aria-hidden="true"></i></span>
-            <span className="title">LogOut</span>
+            <span className="title">Logout</span>
           </a>
         </li>
       </ul>
     </div>
-
-    // <Route path="/admin" component={AdminNav} />
-
   );
-}
-
-function AdminNav({ match }) {
-  const { path } = match;
-
-  return (<div>"Admin Menu"</div>);
 }
 
 export { Nav };

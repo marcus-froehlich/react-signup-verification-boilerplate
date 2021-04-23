@@ -3,7 +3,7 @@
     width: 100%;
     padding: 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
 }
 
@@ -14,9 +14,10 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    max-width: 100%;
 }
 
-.cardBox .card .numbers {
+.cardBox .card .header {
     position: relative;
     font-size: 2em;
     font-weight: 500;
@@ -24,6 +25,10 @@
 
 .cardBox .card .cardName {
     color: #999;
+}
+
+.departmentInput{
+    margin-top: 20px;
 }
 
 .cardBox .card .iconBox {
@@ -39,4 +44,8 @@
 
 .cardHeader h2 {
     font-weight: 600;
+}
+
+.btn-submit-department{
+    margin-top: 20px;
 }

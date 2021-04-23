@@ -40,5 +40,5 @@ function userApplying(id, userId, docs){
 }
 
 function isUserApplied(id) {
-    return fetchWrapper.get(`${baseUrl}/${id}`);
+    return fetchWrapper.get(`${applyingUrl}/${id}`);
 }

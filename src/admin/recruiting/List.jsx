@@ -19,7 +19,7 @@ function List({ match }) {
     recruitingService.getById(id)
       .then(data => {
         setSingle(data);
-        setAppliedUser(data.appliedUser);
+        setAppliedUser(data.userList);
       });
   }
 
@@ -97,10 +97,12 @@ function List({ match }) {
           {single && (
             <div>
               <div className="btn-edit-recruiting">
+                {single.userList.length <= 0 ? null :
                 <Link to={{
                   pathname: `${path}/applicants`,
                   applieduser
-                }} className="btn-sub mr-2">{single.appliedUser.length} Bewerber</Link>
+                }} className="btn-sub mr-2">{single.userList.length} Bewerber</Link>}
+
                 <Link to={`${path}/edit/${single.id}`} className="btn-e mr-2">
                   Editieren
               </Link>
